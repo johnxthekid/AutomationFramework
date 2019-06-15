@@ -1,0 +1,8 @@
+comtypes==1.1.7
+decorator==4.4.0
+py==1.8.0
+pywin32==224
+pywinauto==0.6.6
+retry==0.9.2
+robotframework==3.1.1
+six==1.12.0

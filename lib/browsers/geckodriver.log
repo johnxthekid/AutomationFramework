@@ -1,0 +1,222 @@
+1560473305285	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\johne\\AppData\\Local\\Temp\\rust_mozprofile.jkcAiCxscWOI"
+1560473368183	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\johne\\AppData\\Local\\Temp\\rust_mozprofile.bsXOxJs3k05b"
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+1560473369013	Marionette	INFO	Enabled via --marionette
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+[Parent 14612, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 14904, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 14904, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+1560473370635	Marionette	INFO	Listening on port 62731
+1560473370983	Marionette	WARN	TLS certificate errors will be ignored for this session
+1560473371069	Marionette	DEBUG	Register listener.js for window 4294967297
+1560473377102	Marionette	DEBUG	Received DOM event "beforeunload" for "about:blank"
+1560473377464	Marionette	DEBUG	Received DOM event "pagehide" for "about:blank"
+1560473377464	Marionette	DEBUG	Received DOM event "unload" for "about:blank"
+1560473377959	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "https://www.facebook.com/"
+1560473378634	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967320"
+1560473378639	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967326"
+1560473378648	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967322"
+1560473378913	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967324"
+1560473378915	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967318"
+1560473379295	Marionette	DEBUG	Received DOM event "pageshow" for "https://www.facebook.com/"
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+[Parent 14612, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1"
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+1560473433608	Marionette	INFO	Enabled via --marionette
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+[Child 15756, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 15756, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+1560473435372	Marionette	INFO	Listening on port 62801
+1560473435730	Marionette	WARN	TLS certificate errors will be ignored for this session
+1560473435811	Marionette	DEBUG	Register listener.js for window 4294967297
+1560473441836	Marionette	DEBUG	Received DOM event "beforeunload" for "about:blank"
+1560473442211	Marionette	DEBUG	Received DOM event "pagehide" for "about:blank"
+1560473442211	Marionette	DEBUG	Received DOM event "unload" for "about:blank"
+1560473442614	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "https://www.facebook.com/"
+1560473443292	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967320"
+1560473443293	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967326"
+1560473443311	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967322"
+1560473443443	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967318"
+1560473443566	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967324"
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+1560473443926	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967337"
+1560473443980	Marionette	DEBUG	Received DOM event "pageshow" for "https://www.facebook.com/"
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://www.google.com/recaptcha/api2/bframe?hl=en&v=v1559543665173&k=6Lc9qjcUAAAAADTnJq5kJMjN9aD1lxpRLMnCS2TR&cb=gb06cyxhcg5t, line 184: ReferenceError: recaptcha is not defined
+[Parent 11848, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 13600, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 13600, Chrome_Ch[Parent 11848, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 10124, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 10124, Chrome_ChildTh*** UTM:SVC TimerManager:registerTimer called after profile-before-change notification. Ignoring timer registration for id: telemetry_modules_ping
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1560494183353	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\johne\\AppData\\Local\\Temp\\rust_mozprofile.ndW6IkQhfGpH"
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+1560494184241	Marionette	INFO	Enabled via --marionette
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+[Parent 7848, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 13756, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 13756, Chrome_ChildThread] WARNING: pipe error: 109: file z:/Unable to read VR Path Registry from C:\Users\johne\AppData\Local\openvr\openvrpaths.vrpath
+1560494185952	Marionette	INFO	Listening on port 49996
+1560494186095	Marionette	WARN	TLS certificate errors will be ignored for this session
+1560494186166	Marionette	DEBUG	Register listener.js for window 4294967297
+1560494192339	Marionette	DEBUG	Received DOM event "beforeunload" for "about:blank"
+1560494192746	Marionette	DEBUG	Received DOM event "pagehide" for "about:blank"
+1560494192746	Marionette	DEBUG	Received DOM event "unload" for "about:blank"
+1560494193232	Marionette	DEBUG	Received DOM event "DOMContentLoaded" for "https://www.facebook.com/"
+1560494193919	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967320"
+1560494193919	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967326"
+1560494193936	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967322"
+1560494194091	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967324"
+1560494194092	Marionette	DEBUG	Received observer notification "outer-window-destroyed" for "4294967318"
+1560494194580	Marionette	DEBUG	Received DOM event "pageshow" for "https://www.facebook.com/"
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://static.xx.fbcdn.net/rsrc.php/v3/ys/r/wXmPKw6jBhF.js, line 13: TypeError: h is null
+JavaScript error: https://www.google.com/recaptcha/api2/bframe?hl=en&v=v1559543665173&k=6Lc9qjcUAAAAADTnJq5kJMjN9aD1lxpRLMnCS2TR&cb=kbczbzbm0xet, line 184: ReferenceError: recaptcha is not defined
+[Parent 7848, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Parent 7848, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 14224, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/sr*** UTM:SVC TimerManager:registerTimer called after profile-before-change notification. Ignoring timer registration for id: telemetry_modules_ping
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
