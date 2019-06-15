@@ -11,7 +11,8 @@ class EdgeManager:
 
 if __name__ == "__main__":
     edge = "C:\\workspace\\axframework\\config\\BrowserDrivers\\microsoftWebDriver.exe"
-    driver = webdriver.Edge(edge)
+    '''Requires the latest version of Windows 10 to run without driver location'''
+    driver = webdriver.Edge()
     time.sleep(6)
     driver.get("http://facebook.com")
     username = driver.find_element_by_id("email")
