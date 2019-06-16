@@ -1,12 +1,12 @@
 class ElementActions:
 
-    def __init__(self, browser, element_instance):
+    def __init__(self, browser, element_instance=None):
         """
         Customs actions that an element can perform on the application
         :param element_instance:
         """
         self.browser = browser
-        self.element = browser.find_element(element_instance)
+        self.element = element_instance
 
     def get_element(self, element_locator_type, element_value):
         """
@@ -24,7 +24,8 @@ class ElementActions:
                         "link": self.browser.find_element_by_link_text,
                         "partial_link": self.browser.find_element_by_partial_link_text}
 
-        return locator_type[element_locator_type](element_value)
+        self.element = locator_type[element_locator_type](element_value)
+        return self.element
 
     def get_elements(self, element_locator_type, element_value):
         """
@@ -41,4 +42,5 @@ class ElementActions:
                         "link": self.browser.find_elements_by_link_text,
                         "partial_link": self.browser.find_elements_by_partial_link_text}
 
-        return locator_type[element_locator_type](element_value)
+        self.element = locator_type[element_locator_type](element_value)
+        return self.element
