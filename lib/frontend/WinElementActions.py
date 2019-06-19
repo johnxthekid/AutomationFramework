@@ -10,7 +10,7 @@ import logging
 log = logging.getLogger(__name__)
 
 
-class ElementActions:
+class WinElementActions:
 
     def __init__(self, element_instance):
         """
@@ -392,4 +392,4 @@ class ElementActions:
         """
         :return: the parent object of the element
         """
-        return ElementActions(self.element.parent())
+        return WinElementActions(self.element.parent())

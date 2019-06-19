@@ -29,6 +29,7 @@ class WinAppManager:
         """
         Opens the application to be tested
         :param app_location: Location of the application to automate
+        :param app_name: Window text property name of the application
         :param timeout: time out value before retrying to launch the application
         :param retry_value: number of retries to launch the application
         :return: returns the application instance
