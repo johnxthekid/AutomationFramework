@@ -5,8 +5,9 @@ import time
 
 class ChromeManager:
 
-    def __init__(self):
-        pass
+    def __init__(self, driver_location=None):
+        self.driver_location = driver_location if driver_location is not None else \
+            "C:\\workspace\\axframework\\config\\BrowserDrivers\\chromedriver.exe"
 
 
 if __name__ == "__main__":

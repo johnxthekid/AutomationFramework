@@ -6,7 +6,8 @@ import time
 class EdgeManager:
 
     def __init__(self, driver_location=None):
-        pass
+        self.driver_location = driver_location if driver_location is not None else\
+            "C:\\workspace\\axframework\\config\\BrowserDrivers\\microsoftWebDriver.exe"
 
 
 if __name__ == "__main__":
