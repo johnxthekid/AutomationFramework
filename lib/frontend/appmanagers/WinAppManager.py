@@ -20,7 +20,7 @@ class WinAppManager:
     def __init__(self, app_type="uia"):
         '''
         Class to initialized the main application for automation
-        :param app_type: the backend type for the applicaiton UIA or WIN32
+        :param app_type: the backend type for the application UIA or WIN32
         '''
         self.app = Application(backend=app_type)
         self.desktop_app = Desktop(backend=app_type)
@@ -87,6 +87,9 @@ class WinAppManager:
         :return: returns the dialog object for the window
         """
         return Application(backend=app_type).connect(handle=handle_id).window(handle=handle_id)
+
+    def get_window_title(self, dialog_instance=None):
+        return self.app.top_window().window_text() if dialog_instance is None else dialog_instance.window_text()
 
     def get_app_display_state(self):
         """

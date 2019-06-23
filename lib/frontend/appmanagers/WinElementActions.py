@@ -275,6 +275,23 @@ class WinElementActions:
         except AttributeError:
             raise AttributeError("Element does not have the texts() function")
 
+    def type_element_text(self, text_value, with_spaces=True, wait_time=1):
+        """
+        sets the text value of the element.
+        :param text_value: the text value to input
+        :param with_spaces: add spaces to the values typed
+        :param wait_time: wait time to retrieves the value
+        """
+        try:
+            self.wait_visible(True, wait_time)
+            self.element.type_keys(f'{text_value}', with_spaces=with_spaces)
+        except TimeoutError:
+            raise TimeoutError("element not displayed. TimeoutError")
+        except ElementNotFoundError:
+            raise ElementNotFoundError("element not found. ElementNotFoundError")
+        except AttributeError:
+            raise AttributeError("Element does not have the set_text() function")
+
     def set_element_text(self, text_value, wait_time=1):
         """
         sets the text value of the element.

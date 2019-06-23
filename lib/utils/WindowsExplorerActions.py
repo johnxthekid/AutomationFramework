@@ -1,4 +1,4 @@
-from lib.frontend.WinAppManager import WinAppManager
+from lib.frontend.appmanagers.WinAppManager import WinAppManager
 
 
 class WindowsExplorerActions:
