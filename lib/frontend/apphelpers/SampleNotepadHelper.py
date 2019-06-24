@@ -1,15 +1,11 @@
-import sys
-from os import path
-
-sys.path.append(path.join(path.dirname(__file__), '..', '..', '..', '..'))
-print(sys.path)
-
-from appmanagers.WinAppManager import WinAppManager
-from appmanagers.WinElementActions import WinElementActions
 from pywinauto.findwindows import ElementNotFoundError
+
+from lib.frontend.appmanagers.WinAppManager import WinAppManager
+from lib.frontend.appmanagers.WinElementActions import WinElementActions
 
 
 class SampleNotepadHelper:
+    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
 
     def __init__(self):
         self.app_auto = WinAppManager(WinAppManager.WIN32)
@@ -31,11 +27,11 @@ class SampleNotepadHelper:
         self._notepad = self.app_auto.open_app(location)
         return self._notepad
 
-    def close_notepad(self):
-        self.app_auto.close_app_instance(self._notepad)
+    def close_notepad(self, notepad_instance):
+        self.app_auto.close_app_instance(notepad_instance)
 
-    def user_exit_notepad(self):
-        self.open_submenu('File', 'Exit')
+    def user_exit_notepad(self, notepad_instance):
+        self.open_submenu(notepad_instance, 'File', 'Exit')
         '''New window open with name Notepad'''
         file_window_dlg = self.app_auto.get_new_window_dialog()
         print(f"now on file window: {file_window_dlg.window_text()}")
@@ -44,12 +40,12 @@ class SampleNotepadHelper:
     def get_dialog_title(self, dialog=None):
         return self.app_auto.get_window_title(dialog)
 
-    def open_submenu(self, top_menu, submenu):
-        self._notepad.menu_select(f"{top_menu} -> {submenu}")
+    def open_submenu(self, notepad_instance, top_menu, submenu):
+        notepad_instance.menu_select(f"{top_menu} -> {submenu}")
         return self.app_auto.get_new_window_dialog()
 
-    def open_replace_menu(self):
-        self.open_submenu('Edit', 'Replace')
+    def open_replace_menu(self, notepad_instance):
+        self.open_submenu(notepad_instance, 'Edit', 'Replace')
         menu_window_dlg = self.app_auto.get_new_window_dialog()
         print(f"now on Menu window: {menu_window_dlg.window_text()}")
         assert(menu_window_dlg.window_text() == 'Replace'), "Incorrect window display"
@@ -62,30 +58,30 @@ class SampleNotepadHelper:
             print("Replace window was already closed")
             return menu_window_dlg
 
-    def type_values(self, value, with_spaces=True):
-        edit_win = WinElementActions(self._notepad.Edit)
+    def type_values(self, notepad_instance, value, with_spaces=True):
+        edit_win = WinElementActions(notepad_instance.Edit)
         edit_win.type_element_text(value, with_spaces)
         # self._notepad.Edit.type_keys(f'{value}', with_spaces=with_spaces)
 
-    def get_editor_value(self):
+    def get_editor_value(self, notepad_instance):
         # self._notepad.Edit.texts()
-        edit_win = WinElementActions(self._notepad.Edit)
+        edit_win = WinElementActions(notepad_instance.Edit)
         return edit_win.get_element_text()
 
-    def get_notepad_menus(self):
-        menu_list = self.app_auto.list_dialog_menu(self._notepad)
+    def get_notepad_menus(self, notepad_instance):
+        menu_list = self.app_auto.list_dialog_menu(notepad_instance)
         clean_list = self.app_auto.get_clean_menus(menu_list)
         return clean_list
 
 
 if __name__ == "__main__":
     note = SampleNotepadHelper()
-    note.open_notepad()
-    new_dlg = note.open_submenu("Edit", "Replace")
+    n_dlg = note.open_notepad()
+    new_dlg = note.open_submenu(n_dlg, "Edit", "Replace")
     print(f"New dialog: {note.get_dialog_title(new_dlg)}")
     note.close_replace_menu()
-    note.open_replace_menu()
+    note.open_replace_menu(n_dlg)
     note.close_replace_menu()
-    note.type_values(f"{dir()}")
-    print(f"values typed in editor: \n{note.get_editor_value()}")
-    note.user_exit_notepad()
+    note.type_values(n_dlg, f"{dir()}")
+    print(f"values typed in editor: \n{note.get_editor_value(n_dlg)}")
+    note.user_exit_notepad(n_dlg)

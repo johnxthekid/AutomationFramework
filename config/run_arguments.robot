@@ -1,0 +1,3 @@
+--timestampoutputs
+--outputdir  .\report\output
+--loglevel  trace
