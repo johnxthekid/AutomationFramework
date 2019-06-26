@@ -30,43 +30,6 @@ class ElementActions:
         else:
             self.element = self.browser.find_element(*locator)
 
-    # def get_element(self, element_locator_type, element_value):
-    #     """
-    #     Returns the element base on the provide property value
-    #     :param element_locator_type: the locator type to use to find the element
-    #     :param element_value: the value of the element
-    #     :return: the located element
-    #     """
-    #     locator_type = {"id": self.browser.find_element_by_id,
-    #                     "name": self.browser.find_element_by_name,
-    #                     "xpath": self.browser.find_element_by_xpath,
-    #                     "css": self.browser.find_element_by_css_selector,
-    #                     "class": self.browser.find_element_by_class_name,
-    #                     "tag": self.browser.find_element_by_tag_name,
-    #                     "link": self.browser.find_element_by_link_text,
-    #                     "partial_link": self.browser.find_element_by_partial_link_text}
-    #
-    #     self.element = locator_type[element_locator_type](element_value)
-    #     return self.element
-    #
-    # def get_elements(self, element_locator_type, element_value):
-    #     """
-    #     Returns the element base on the provide property value
-    #     :param element_locator_type: the locator type to use to find the element
-    #     :param element_value: the value of the element
-    #     :return: the located elements
-    #     """
-    #     locator_type = {"name": self.browser.find_elements_by_name,
-    #                     "xpath": self.browser.find_elements_by_xpath,
-    #                     "css": self.browser.find_elements_by_css_selector,
-    #                     "class": self.browser.find_elements_by_class_name,
-    #                     "tag": self.browser.find_elements_by_tag_name,
-    #                     "link": self.browser.find_elements_by_link_text,
-    #                     "partial_link": self.browser.find_elements_by_partial_link_text}
-    #
-    #     self.element = locator_type[element_locator_type](element_value)
-    #     return self.element
-
     def get_element_instance(self):
         """
         :return: the instance of the element.
@@ -91,25 +54,6 @@ class ElementActions:
             log.error(f"Exception thrown: {Exception}")
             return False
 
-    # def element_wait(self, property, wait_time=1):
-    #     """
-    #     waits for the status of the element
-    #     'enabled', 'visible', 'exists'
-    #     :param status: property to be validated
-    #     :param wait_time: time to wait for the status
-    #     :return: True or False
-    #     """
-    #     try:
-    #         self.element.wait(property, wait_time)
-    #     except TimeoutError:
-    #         raise TimeoutError("Element was not loaded in time")
-    #     except ElementNotFoundError:
-    #         raise ElementNotFoundError("Element was not found")
-    #     except AttributeError:
-    #         raise AttributeError("Element does not the specify wait property")
-    #     except TypeError:
-    #         raise TypeError(f"Incorrect property type provided: {type(self.element)}")
-
     def click(self, wait_time=3):
         """
         Executes the element's click event if it exist.
@@ -117,9 +61,16 @@ class ElementActions:
         :param wait_time: time to wait for the element to be visible before clicking
         :return:
         """
-        # if WebDriverWait(self.browser, wait_time).until(EC.element_to_be_clickable(self.locator)):
-        if WebDriverWait(self.browser, wait_time).until(EC.visibility_of(self.element)):
-            log.error("Element was not visible before executing the click event")
+        try:
+            WebDriverWait(self.browser, wait_time).until(EC.visibility_of(self.element))
+            self.element.click()
+        except StaleElementReferenceException as e:
+            log.error("Element was not visible")
+            raise e.msg
+
+    @property
+    def select(self):
+        return Select(self.element)
 
     # def get_status(self):
     #     """
