@@ -38,6 +38,11 @@ Test Run:
 -m robot -A .\config\run_arguments.robot test\browser\browser_test
 ```
 
+passing variables
+```
+robot -A .\config\run_arguments.robot --variable BROWSER:chrome test\browser
+```
+
 #### Command Line Configuration
 To run on the command line, navigate to the project root directory and run the command below
 ```

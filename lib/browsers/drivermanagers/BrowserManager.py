@@ -1,15 +1,10 @@
-from selenium import webdriver
-
 from lib.browsers.drivermanagers.ChromeManager import ChromeManager
 from lib.browsers.drivermanagers.EdgeManager import EdgeManager
 from lib.browsers.drivermanagers.FirefoxManager import FirefoxManager
 
 chrome = "chrome"
-chrome_location = "C:\\workspace\\axframework\\config\\BrowserDrivers\\chromedriver.exe"
 edge = "edge"
-edge_location = "C:\\workspace\\axframework\\config\\BrowserDrivers\\microsoftWebDriver.exe"
 firefox = "firefox"
-firefox_location = "C:\\workspace\\axframework\\config\\BrowserDrivers\\geckodriver.exe"
 
 
 class BrowserSetup:
@@ -43,6 +38,7 @@ class BrowserManager:
 
     def get_page_title(self):
         return self.browser.title
+
 
 if __name__ == "__main__":
     bm = BrowserManager('chrome')

@@ -10,6 +10,9 @@ class FirefoxManager:
         self.driver_location = driver_location if driver_location is not None else \
             "C:\\workspace\\axframework\\config\\BrowserDrivers\\geckodriver.exe"
 
+    def open_browser(self):
+        return webdriver.Firefox(executable_path=self.driver_location)
+
 
 if __name__ == "__main__":
     firefox = "C:\\workspace\\axframework\\config\\BrowserDrivers\\geckodriver.exe"
