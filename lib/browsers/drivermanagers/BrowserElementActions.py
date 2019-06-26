@@ -3,6 +3,7 @@ from selenium.webdriver.support import wait
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains as AC
+from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchAttributeException, NoSuchElementException, ElementNotVisibleException, \
     InvalidElementStateException, StaleElementReferenceException, ElementClickInterceptedException
 
@@ -12,16 +13,22 @@ log = logging.getLogger(__name__)
 
 class ElementActions:
 
-    def __init__(self, browser_driver, *locator):
+    def __init__(self, browser_driver, *locator, multiple=False):
         """
         Customs actions that an element can perform on the application
         :param element_instance:
         """
         self.browser = browser_driver
-        self.locator = iter(locator)
-        if len(locator) < 2:
-            raise AttributeError("Either the locator type or locator value is missing")
-        self.element = self.browser.find_element(*locator)
+        self.locator = locator
+        if len(locator) > 2:
+            raise AttributeError(f"locator expected to contain type and value. {locator}{len(locator)}")
+
+        if multiple:
+            self.element = self.browser.find_elements(*self.locator)
+            # WebDriverWait(self.browser, 5).until(EC.presence_of_all_elements_located(self.locator))
+            # print(f'list of elements: {self.element}')
+        else:
+            self.element = self.browser.find_element(*locator)
 
     # def get_element(self, element_locator_type, element_value):
     #     """
@@ -81,7 +88,7 @@ class ElementActions:
                 log.debug("Waiting for the element to NOT be visible")
                 return WebDriverWait(self.browser, wait_time).until_not(EC.visibility_of(self.element))
         except Exception:
-            log.debug(f"Exception thrown: {Exception}")
+            log.error(f"Exception thrown: {Exception}")
             return False
 
     # def element_wait(self, property, wait_time=1):
@@ -110,8 +117,9 @@ class ElementActions:
         :param wait_time: time to wait for the element to be visible before clicking
         :return:
         """
-        if WebDriverWait(self.browser, wait_time).until(EC.element_to_be_clickable(*self.locator)):
-            log.debug("Element was not visible before executing the click event")
+        # if WebDriverWait(self.browser, wait_time).until(EC.element_to_be_clickable(self.locator)):
+        if WebDriverWait(self.browser, wait_time).until(EC.visibility_of(self.element)):
+            log.error("Element was not visible before executing the click event")
 
     # def get_status(self):
     #     """

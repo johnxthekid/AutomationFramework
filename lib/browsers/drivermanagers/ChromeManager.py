@@ -9,6 +9,9 @@ class ChromeManager:
         self.driver_location = driver_location if driver_location is not None else \
             "C:\\workspace\\axframework\\config\\BrowserDrivers\\chromedriver.exe"
 
+    def open_browser(self):
+        return webdriver.Chrome(self.driver_location)
+
 
 if __name__ == "__main__":
     chrome = "C:\\workspace\\axframework\\config\\BrowserDrivers\\chromedriver.exe"
