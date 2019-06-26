@@ -70,6 +70,10 @@ class ElementActions:
 
     @property
     def select(self):
+        '''
+        property to initialize the Select library in Selenium
+        :return: Select Object
+        '''
         return Select(self.element)
 
     # def get_status(self):
