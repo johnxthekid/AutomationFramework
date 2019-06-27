@@ -20,15 +20,13 @@ class ElementActions:
         """
         self.browser = browser_driver
         self.locator = locator
-        if len(locator) > 2:
-            raise AttributeError(f"locator expected to contain type and value. {locator}{len(locator)}")
+        if len(self.locator) > 2:
+            raise AttributeError(f"locator expected to contain type and value. {self.locator}{len(self.locator)}")
 
         if multiple:
             self.element = self.browser.find_elements(*self.locator)
-            # WebDriverWait(self.browser, 5).until(EC.presence_of_all_elements_located(self.locator))
-            # print(f'list of elements: {self.element}')
         else:
-            self.element = self.browser.find_element(*locator)
+            self.element = self.browser.find_element(*self.locator)
 
     def get_element_instance(self):
         """

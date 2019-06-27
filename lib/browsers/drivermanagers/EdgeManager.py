@@ -10,7 +10,9 @@ class EdgeManager:
             "C:\\workspace\\axframework\\config\\BrowserDrivers\\microsoftWebDriver.exe"
 
     def open_browser(self):
-        '''Need Chrome driver in the ENV PATH'''
+        """
+        Need Chrome driver in the ENV PATH
+        """
         return webdriver.Edge()
 
 
