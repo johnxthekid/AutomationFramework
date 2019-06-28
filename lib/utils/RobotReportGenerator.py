@@ -30,17 +30,24 @@ class RobotReportGenerator:
             result.visit(GetResults(xml_file))
 
     @staticmethod
-    def updatepassedresults(report):
+    def updatepassedresults(report, output_name='common_passed.xml'):
         end_result = ExecutionResult(report)
         end_result.visit(UpdateResultsBaseOnPass(results=end_result))
-        end_result.save('common_passed.xml')
+        end_result.save(output_name)
 
-    @staticmethod
-    def generate_report(*output_reports, name="Test Application", outputdir=None, update_if_pass=True):
+    @classmethod
+    def generate_report(cls, *output_reports, name="Test Application", outputdir=None, update_if_pass=True):
+
+        rebot(*output_reports, name=name.strip().replace(' ', '_'), merge=True, outputdir=os.getcwd()
+            if outputdir is not None else outputdir, output='combine_output.xml',
+              log='combine_log.xml', report='combine_report.xml')
+
         if update_if_pass:
-            UpdateResultsBaseOnPass()
-            rebot(*output_reports, name=name.strip().replace(' ', '_'), merge=True, outputdir= os.getcwd()
-                if outputdir is not None else outputdir, output='combine_output.xml',
+            RobotReportGenerator.get_test_status(*output_reports)
+            RobotReportGenerator.updatepassedresults('combine_output.xml')
+
+            rebot(*output_reports, name=name.strip().replace(' ', '_'), merge=True, outputdir=os.getcwd()
+            if outputdir is not None else outputdir, output='combine_output.xml',
                   log='combine_log.xml', report='combine_report.xml')
 
 
@@ -72,3 +79,5 @@ if __name__ == '__main__':
     rd = rpg.get_root_folder()
     xml_list = rpg.get_xml_files(rd)
     rpg.generate_report(*xml_list, name="Sample Report Combine", outputdir=rd)
+
+    # todo: make it work with different root directories
