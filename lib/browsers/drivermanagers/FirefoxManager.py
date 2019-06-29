@@ -1,10 +1,10 @@
-import os
+import os, sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import time
 
-root_dir = os.path.join(os.getcwd(), "..", "..", "..", "config", "BrowserDrivers")
+root_dir = os.path.join(os.path.dirname(__file__), "..", "..", "..", "config", "BrowserDrivers")
 
 
 class FirefoxManager:

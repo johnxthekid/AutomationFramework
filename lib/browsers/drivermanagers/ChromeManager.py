@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
-root_dir = os.path.join(os.getcwd(), "..", "..", "..", "config", "BrowserDrivers")
+root_dir = os.path.join(os.path.dirname(__file__), "..", "..", "..", "config", "BrowserDrivers")
 
 
 class ChromeManager:
