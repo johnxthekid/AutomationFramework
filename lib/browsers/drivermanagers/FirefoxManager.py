@@ -1,25 +1,32 @@
+import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 import time
+
+root_dir = os.path.join(os.getcwd(), "..", "..", "..", "config", "BrowserDrivers")
 
 
 class FirefoxManager:
 
     def __init__(self, driver_location=None):
         self.driver_location = driver_location if driver_location is not None else \
-            "C:\\workspace\\axframework\\config\\BrowserDrivers\\geckodriver.exe"
+            f"{os.path.join(root_dir, 'geckodriver.exe')}"
+
+        if not os.path.exists(self.driver_location):
+            raise AttributeError(f"Driver path does not exist: {self.driver_location}")
 
     def open_browser(self):
         return webdriver.Firefox(executable_path=self.driver_location)
 
 
 if __name__ == "__main__":
-    firefox = "C:\\workspace\\axframework\\config\\BrowserDrivers\\geckodriver.exe"
+    # firefox = "C:\\workspace\\axframework\\config\\BrowserDrivers\\geckodriver.exe"
 
-    firefox_binary = FirefoxBinary("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe")
+    # firefox_binary = FirefoxBinary("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe")
     # driver = webdriver.Firefox(firefox_binary=firefox_binary, executable_path=firefox)
-    driver = webdriver.Firefox(executable_path=firefox)
+    # driver = webdriver.Firefox(executable_path=firefox)
+    driver = FirefoxManager().open_browser()
     time.sleep(6)
     driver.get("http://facebook.com")
     username = driver.find_element_by_id("email")
