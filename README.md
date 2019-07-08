@@ -49,18 +49,26 @@ To run on the command line, navigate to the project root directory and run the c
 python -m robot -A .\config\run_arguments.robot test\browser
 ```
 
-### And coding style tests
+### Setting up a virtual environment
 
-Explain what these tests test and why
+In Python, each project may have separate libraries that they use. So, it is best to create separate virtual environment for each python project.
+
+To create a virtual environment, navigate to the location where you want the folder to contain the virtual environment libraries to be located and run the commands below
 
 ```
-Give an example
+python -m venv <virtual environment folder name>
+```
+
+Once created, the virtual environment needs to be activated. This can be done by navigating to the newly created folder and locating the 'Scripts' folder and run the commands below
+
+```
+activate.bat
 ```
 
 ## Authors
 
-* **John Exantus** - *Initial work*
+* **John Exantus** - *Full Framework*
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is property of John Exantus and may be reused without explicit permission.
