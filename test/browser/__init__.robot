@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Sample test on browsers
+Documentation    Browsers Root Suite
 Library  ../../lib/browsers/drivermanagers/BrowserManager.py    ${BROWSER}
 Suite Setup  launch browser
 Suite Teardown  close browser

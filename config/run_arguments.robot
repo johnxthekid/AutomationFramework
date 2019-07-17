@@ -1,6 +1,6 @@
 --timestampoutputs
 # --rerunfailed     .\report\output\output.xml
---outputdir  .\report\output
+--outputdir  .\report\output\run1
 --loglevel  trace
 
 --variable  BROWSER:chrome
@@ -9,4 +9,3 @@
 # --exclude     run_tags
 
 --suite  browser
---suite  notepad
