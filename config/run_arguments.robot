@@ -7,3 +7,5 @@
 
 # --include     run_tags
 # --exclude     run_tags
+
+ --suite  browser

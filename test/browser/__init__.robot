@@ -1,21 +1,27 @@
 *** Settings ***
 Documentation    Sample test on browsers
-Library  ../../lib/browsers/drivermanagers/BrowserManager.py    ${BROWSER}
+Library    pabot.PabotLib
+Library  ../../lib/browsers/drivermanagers/BrowserManager.py    #${BROWSER}
 Suite Setup  launch browser
 Suite Teardown  close browser
 
-*** variables ***
+*** Variables ***
 ${URL}          http://blazedemo.com/
 ${BROWSER}      chrome
 
-*** keywords ***
+*** Keywords ***
 launch browser
     [Tags]    DEBUG
+    ${valuesetname}=    Acquire Value Set
+    Log    ${valuesetname}
+    ${browser}=     Get Value From Set   browser
+    Log    ${browser}
+    set_browser_instance    ${browser}
     open page   ${URL}
     ${title} =  get page title
     log to console  ${title}
     should match  ${title}  BlazeDemo
 
     ${driver}   get browser instance
-    Set Global Variable     ${BROWSER}
+    Set Global Variable     ${browser}
     Set Global Variable     ${driver}
