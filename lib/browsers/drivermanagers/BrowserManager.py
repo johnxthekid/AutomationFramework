@@ -1,3 +1,7 @@
+import sys
+from os import path
+sys.path.append(path.join(path.dirname(__file__), "..", "..", ".."))
+
 from lib.browsers.drivermanagers.ChromeManager import ChromeManager
 from lib.browsers.drivermanagers.EdgeManager import EdgeManager
 from lib.browsers.drivermanagers.FirefoxManager import FirefoxManager
@@ -24,7 +28,11 @@ class BrowserSetup:
 
 class BrowserManager:
 
-    def __init__(self, browser, driver_location=None):
+    def __init__(self, browser=None, driver_location=None):
+        # self.browser = BrowserSetup._init_browser(browser, driver_location)
+        self.set_browser_instance(browser, driver_location) if browser is not None else None
+
+    def set_browser_instance(self, browser, driver_location=None):
         self.browser = BrowserSetup._init_browser(browser, driver_location)
 
     def get_browser_instance(self):
