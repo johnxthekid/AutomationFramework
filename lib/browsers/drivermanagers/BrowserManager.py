@@ -20,22 +20,23 @@ class BrowserSetup:
     @classmethod
     def _init_browser(cls, browser_type, driver_location=None):
         browser_list = {chrome: ChromeManager, edge: EdgeManager, firefox: FirefoxManager}
-        if cls._driver is None:
-            _browser = browser_list.get(browser_type, None)
-            if _browser is None:
-                raise AttributeError(f"incorrect browser type provide: {browser_type}")
+        # if cls._driver is None:
+        _browser = browser_list.get(browser_type, None)
+        if _browser is None:
+            raise AttributeError(f"incorrect browser type provide: {browser_type}")
 
-            cls._driver = _browser(driver_location).open_browser()
-        return cls._driver
+        return _browser(driver_location).open_browser()
+        # return cls._driver
 
 
 class BrowserManager:
     __BROWSER_INSTANCES = {}
 
-    def __init__():
-        pass
+    def __init__(self):
+        logger.info("Browser Manager set")
 
-    def open_browser(self, browser=None, driver_location=None):
+    @staticmethod
+    def open_browser(browser=None, driver_location=None):
         if browser is None:
             raise AttributeError(f"Please specify one of the following browsers to initialize: \n{chrome, edge, firefox}")
         else:
@@ -47,6 +48,10 @@ class BrowserManager:
         browser_id = str(uuid.uuid1())
         BrowserManager.__BROWSER_INSTANCES.update({browser_id: browser_instance})
         return browser_id
+
+    @staticmethod
+    def delele_browser_instance(browser_id):
+        del BrowserManager.__BROWSER_INSTANCES[browser_id]
 
     @staticmethod
     def get_browser_instance(browser_id):
@@ -62,7 +67,7 @@ class BrowserManager:
 
     def close_browser(self, browser_id):
         browser = self.get_browser_instance(browser_id)
-        browser.close()
+        browser.quit()
 
     def get_page_title(self, browser_id):
         browser = self.get_browser_instance(browser_id)

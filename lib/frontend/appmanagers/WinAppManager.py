@@ -64,7 +64,7 @@ class WinAppManager:
         self.__class__.EXISTING_APP_PROCESS.append(app_process)
         self.APP_INSTANCES.update({app_id: app_dlg})
         print(self.__class__.EXISTING_APP_PROCESS)
-        return app_id, app_dlg
+        return app_id
 
     @classmethod
     def get_app_instance(cls, app_id):

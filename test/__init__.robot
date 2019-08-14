@@ -6,7 +6,7 @@ Suite Setup     get arguments
 ${BROWSER_PATH}     ${CURDIR}/../lib/browsers
 ${APP_PATH}     ${CURDIR}/../lib/frontend
 
-*** keywords ***
+*** Keywords ***
 get arguments
     Set Global Variable    ${BROWSER_PATH}
     Set Global Variable    ${APP_PATH}

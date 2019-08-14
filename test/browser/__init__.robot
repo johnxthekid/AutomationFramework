@@ -8,14 +8,13 @@ Suite Teardown  close and release values
 
 *** Variables ***
 ${URL}          http://blazedemo.com/
-${BROWSER}      edge
 
 *** Keywords ***
 launch browser
     [Tags]    DEBUG
     ${valuesetname}=    Acquire Value Set
     Log    ${valuesetname}
-    ${browser}=     Get Value From Set   browser
+    ${browser}=     Get Value From Set   BROWSER
     ${HOST}=    Get Value From Set      HOST
     ${PORT}=    Get Value From Set      PORT
     Log    ${browser}

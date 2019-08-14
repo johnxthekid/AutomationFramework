@@ -1,7 +1,7 @@
 from os import path
 import sys
 sys.path.append(path.join(path.dirname(__file__), "..", "..", ".."))
-print(sys.path)
+# print(sys.path)
 
 from pywinauto.findwindows import ElementNotFoundError
 
@@ -13,6 +13,7 @@ class SampleNotepadHelper:
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
     _notepad = None
     _menu_dlg = None
+    app_mgr = None
 
     def __init__(self):
         self.app_mgr = WinAppManager(WinAppManager.WIN32)
@@ -31,7 +32,7 @@ class SampleNotepadHelper:
         self._notepad = None
 
     def open_notepad(self, location='Notepad.exe'):
-        notepad_id, self._notepad = self.app_mgr.open_app(location)
+        notepad_id = self.app_mgr.open_app(location)
         return notepad_id
 
     def close_notepad(self, notepad_id):
@@ -82,13 +83,14 @@ class SampleNotepadHelper:
 
 
 if __name__ == "__main__":
-    note = SampleNotepadHelper()
-    note.open_notepad()
-    note.open_submenu("Edit", "Replace")
-    print(f"New dialog: {note.get_dialog_title()}")
-    note.close_replace_menu()
-    note.open_replace_menu()
-    note.close_replace_menu()
-    note.type_values(f"{dir()}")
-    print(f"values typed in editor: \n{note.get_editor_value()}")
-    note.user_exit_notepad()
+    pass
+    # note = SampleNotepadHelper()
+#     # note.open_notepad()
+#     # note.open_submenu("Edit", "Replace")
+#     # print(f"New dialog: {note.get_dialog_title()}")
+#     # note.close_replace_menu()
+#     # note.open_replace_menu()
+#     # note.close_replace_menu()
+#     # note.type_values(f"{dir()}")
+#     # print(f"values typed in editor: \n{note.get_editor_value()}")
+#     # note.user_exit_notepad()

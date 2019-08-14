@@ -2,24 +2,26 @@ import sys
 from os import path
 sys.path.append(path.join(path.dirname(__file__), "..", "..", ".."))
 
-from selenium.webdriver.common.by import By
+from robot.api import logger
 
 from lib.browsers.drivermanagers.BrowserManager import BrowserManager
 from lib.browsers.drivermanagers.BrowserElementActions import ElementActions
-from config.browerproperties.demopage_properties import *
+from config.browserproperties.demopage_properties import *
 
 
 class DemoMainPage:
+    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
+    _browser_manager = None
 
     def __init__(self):
         self._browser_manager = BrowserManager()
 
-    def open_browser(self, browser):
-        browser_id = self._browser_manager.open_browser(browser)
+    @staticmethod
+    def open_browser(browser):
+        browser_id = BrowserManager.open_browser(browser)
         return browser_id
 
-    def select_departure_city(self, browser_id,
-     city):
+    def select_departure_city(self, browser_id, city):
         driver = self._browser_manager.get_browser_instance(browser_id)
         departure_city_field = ElementActions(driver, *departure_city)
         departure_city_field.select.select_by_value(city)
@@ -39,16 +41,17 @@ class DemoMainPage:
         return [flight.text for flight in flights.element]
 
     def open_page(self, browser_id, url):
-        browser = self._browser_manager.get_browser_instance(browser_id)
-        browser.get(url)
-
-    def close_browser(self, browser_id):
-        browser = self._browser_manager.get_browser_instance(browser_id)
-        browser.close()
+        driver = self._browser_manager.get_browser_instance(browser_id)
+        driver.get(url)
 
     def get_page_title(self, browser_id):
-        browser = self._browser_manager.get_browser_instance(browser_id)
-        return browser.title
+        driver = self._browser_manager.get_browser_instance(browser_id)
+        return driver.title
+
+    def close_browser(self, browser_id):
+        driver = self._browser_manager.get_browser_instance(browser_id)
+        driver.close()
+        self._browser_manager.delele_browser_instance(browser_id)
 
 
 if __name__ == '__main__':
