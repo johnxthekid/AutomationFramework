@@ -1,14 +1,15 @@
 --timestampoutputs
 # --rerunfailed     .\report\output\output.xml
---outputdir  .\report\output\run1
+--outputdir  .\report\parallel
 --loglevel  trace
 
---variable  BROWSER:chrome
+# --variable  BROWSER:chrome
 
 # --include     run_tags
 # --exclude     run_tags
 
- --suite  browser
+--suite  browser
+--suite     sample_suite
 
 #pabot --verbose -A .\config\test_arg.robot test
 #pabot --verbose -A .\config\run_arguments.robot test
