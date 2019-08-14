@@ -16,6 +16,4 @@ class RemoteServer(DemoMainPage, SampleNotepadHelper):
 
 
 if __name__ == '__main__':
-    print(RemoteServer.__mro__)
-    # server = Robotremoteserver(RemoteServer(), host='127.0.0.1', port='8270', server=False)
     server = RobotRemoteServer(RemoteServer(), host='192.168.0.135', port=8570)
