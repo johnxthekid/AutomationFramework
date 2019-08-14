@@ -2,6 +2,9 @@ import sys
 from os import path
 sys.path.append(path.join(path.dirname(__file__), "..", "..", ".."))
 
+import uuid
+from robot.api import logger
+
 from lib.browsers.drivermanagers.ChromeManager import ChromeManager
 from lib.browsers.drivermanagers.EdgeManager import EdgeManager
 from lib.browsers.drivermanagers.FirefoxManager import FirefoxManager
@@ -20,38 +23,57 @@ class BrowserSetup:
         if cls._driver is None:
             _browser = browser_list.get(browser_type, None)
             if _browser is None:
-                raise AttributeError("incorrect browser type provide")
+                raise AttributeError(f"incorrect browser type provide: {browser_type}")
 
             cls._driver = _browser(driver_location).open_browser()
         return cls._driver
 
 
 class BrowserManager:
+    __BROWSER_INSTANCES = {}
 
-    def __init__(self, browser=None, driver_location=None):
-        # self.browser = BrowserSetup._init_browser(browser, driver_location)
-        self.set_browser_instance(browser, driver_location) if browser is not None else None
+    def __init__():
+        pass
 
-    def set_browser_instance(self, browser, driver_location=None):
-        self.browser = BrowserSetup._init_browser(browser, driver_location)
+    def open_browser(self, browser=None, driver_location=None):
+        if browser is None:
+            raise AttributeError(f"Please specify one of the following browsers to initialize: \n{chrome, edge, firefox}")
+        else:
+            return BrowserManager.set_browser_instance(browser, driver_location)
 
-    def get_browser_instance(self):
-        return self.browser
+    @staticmethod
+    def set_browser_instance(browser, driver_location=None):
+        browser_instance = BrowserSetup._init_browser(browser, driver_location)
+        browser_id = str(uuid.uuid1())
+        BrowserManager.__BROWSER_INSTANCES.update({browser_id: browser_instance})
+        return browser_id
 
-    def open_page(self, url):
-        self.browser.get(url)
+    @staticmethod
+    def get_browser_instance(browser_id):
+        logger.info(f"brower id: {browser_id}")
+        logger.debug(f"browser list: {BrowserManager.__BROWSER_INSTANCES}")
+        browser = BrowserManager.__BROWSER_INSTANCES.get(browser_id, None)
+        logger.info(f"Browser instance: {browser}")
+        return browser
 
-    def close_browser(self):
-        self.browser.close()
+    def open_page(self, browser_id, url):
+        browser = self.get_browser_instance(browser_id)
+        browser.get(url)
 
-    def get_page_title(self):
-        return self.browser.title
+    def close_browser(self, browser_id):
+        browser = self.get_browser_instance(browser_id)
+        browser.close()
+
+    def get_page_title(self, browser_id):
+        browser = self.get_browser_instance(browser_id)
+        return browser.title
 
 
 if __name__ == "__main__":
-    bm = BrowserManager('chrome')
-    bm.open_page("http://blazedemo.com/")
-    print(bm.get_page_title())
+    bm = BrowserManager()
+    browser_id = bm.open_browser('chrome')
+    bm.open_page(browser_id, "http://blazedemo.com/")
+    print(bm.get_page_title(browser_id))
 
 
 
