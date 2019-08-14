@@ -16,4 +16,4 @@ class RemoteServer(DemoMainPage, SampleNotepadHelper):
 
 
 if __name__ == '__main__':
-    server = RobotRemoteServer(RemoteServer(), host='192.168.0.135', port=8570)
+    server = RobotRemoteServer(RemoteServer(), host='192.168.0.144', port=8570)
