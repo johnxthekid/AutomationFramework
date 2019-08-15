@@ -1,18 +1,27 @@
 *** Settings ***
 Documentation    Sample suite for notepad test cases
-Library  ../../lib/frontend/apphelpers/SampleNotepadHelper.py
 Library  OperatingSystem
+
+Suite Setup     Conditional Library Import  ${HOST}      ${PORT}
+
+
+*** Keywords ***
+Conditional Library Import
+    [Arguments]     ${HOST}=${EMPTY}     ${PORT}=${EMPTY}
+    Run Keyword If  "${HOST}" != "${EMPTY}"
+    ...     Import Library      Remote      http://${HOST}:${PORT}
+    ...     ELSE
+    ...     Import Library  ${APP_PATH}/apphelpers/SampleNotepadHelper.py
+
 
 *** Test Cases ***
 sample test case scenario
-    ${new_dlg} =    open submenu  ${notepad_instance}   Edit  Replace
-    ${new_title} =  get dialog title    ${new_dlg}
+    open submenu  ${notepad_id}   Edit  Replace
+    ${new_title} =  get dialog title    ${notepad_id}
     log to console  ${new_title}
-    close replace menu
-    open replace menu   ${notepad_instance}
-    close replace menu
-    type values  ${notepad_instance}    ${CURDIR}
-    ${editor_text} =    get editor value    ${notepad_instance}
+    close submenu
+    open replace menu   ${notepad_id}
+    close submenu
+    type values  ${notepad_id}    ${CURDIR}
+    ${editor_text} =    get editor value    ${notepad_id}
     log to console  ${editor_text}
-
-*** Keywords ***
