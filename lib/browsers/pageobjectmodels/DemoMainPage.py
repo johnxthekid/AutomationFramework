@@ -9,6 +9,7 @@ from lib.browsers.drivermanagers.BrowserElementActions import ElementActions
 from config.browserproperties.demopage_properties import *
 
 
+
 class DemoMainPage:
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
     _browser_manager = None
