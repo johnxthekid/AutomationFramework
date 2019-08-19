@@ -26,11 +26,8 @@ get arguments
     Set Global Variable    ${RunLocation}
     Set Global Variable    ${KeywordLibrary}
     Set Global Variable    ${browser}
-    # Set Global Variable  ${HOST}
-    # Set Global Variable  ${PORT}
 
     Import Resource     ${CURDIR}/keywords.library.resource
-    # ${driver} =   open browser    chrome
 
 Set Remote Library
     Set Variable      ${KeywordLibrary}      Remote
