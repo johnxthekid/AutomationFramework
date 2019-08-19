@@ -1,7 +1,8 @@
 *** Settings ***
 Documentation    sample test suite
-Library    pabot.PabotLib
-Suite Setup     Conditional Library Import    ${HOST}  ${PORT}
+Resource    ${KEYWORDLIBPATH}/keywords.library.resource
+# Library    pabot.PabotLib
+# Suite Setup     Conditional Library Import    ${HOST}  ${PORT}
 
 *** Test Cases ***
 test sample actions on broswer
