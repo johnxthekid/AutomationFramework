@@ -13,12 +13,7 @@ ${PORT}                 ${EMPTY}
 
 *** Keywords ***
 get arguments
-    ${valuesetname}=    Acquire Value Set
-    Log    ${valuesetname}
-    ${browser}=     Get Value From Set   BROWSER
-    ${HOST}=    Get Value From Set      HOST
-    ${PORT}=    Get Value From Set      PORT
-
+    Run Keyword and Ignore Error    get resource values
     Run Keyword If  "${HOST}" != "${EMPTY}"
     ...     Set Remote Library
 
@@ -28,6 +23,17 @@ get arguments
     Set Global Variable    ${browser}
 
     Import Resource     ${CURDIR}/keywords.library.resource
+
+get resource values
+    ${valuesetname}=    Acquire Value Set
+    Log    ${valuesetname}
+    ${browser}=     Get Value From Set   BROWSER
+    ${HOST}=    Get Value From Set      HOST
+    ${PORT}=    Get Value From Set      PORT
+
+    Set Global Variable     ${BROWSER}
+    Set Global Variable     ${HOST}
+    Set Global Variable     ${PORT}
 
 Set Remote Library
     Set Variable      ${KeywordLibrary}      Remote

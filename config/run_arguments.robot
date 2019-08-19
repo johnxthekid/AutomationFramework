@@ -3,7 +3,7 @@
 --outputdir  .\report\parallel
 --loglevel  trace
 
-# --variable  BROWSER:chrome
+--variable  BROWSER:chrome
 
 # --include     run_tags
 # --exclude     run_tags
