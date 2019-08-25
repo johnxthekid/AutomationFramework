@@ -1,6 +1,5 @@
 *** Settings ***
 Documentation    Browsers Root Suite
-Library    pabot.PabotLib
 Resource    ${KEYWORDLIBPATH}/keywords.library.resource
 Suite Setup  launch browser
 Suite Teardown  close and release values

@@ -1,6 +1,7 @@
 import os
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 import time
 
@@ -17,7 +18,11 @@ class ChromeManager:
             raise AttributeError(f"Driver path does not exist: {self.driver_location}")
 
     def open_browser(self):
-        return webdriver.Chrome(self.driver_location)
+        chrome_options = None
+        # chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--no-sandbox')
+        # chrome_options.add_argument('--disable-dev-shm-usage')
+        return webdriver.Chrome(self.driver_location, chrome_options=chrome_options)
 
 
 if __name__ == "__main__":

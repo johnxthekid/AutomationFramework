@@ -2,7 +2,6 @@
 # --rerunfailed     .\report\output\output.xml
 --outputdir  .\report\parallel
 --loglevel  trace
-
 --variable  BROWSER:chrome
 
 # --include     run_tags

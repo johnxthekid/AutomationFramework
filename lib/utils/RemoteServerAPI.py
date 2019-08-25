@@ -3,18 +3,10 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 import argparse
 
-from robotremoteserver import RobotRemoteServer
+from robotremoteserver import RobotRemoteServer, test_remote_server
 
 from lib.utils.AllKeywordsLibrary import AllKeywordsLibrary
-# from lib.frontend.apphelpers.SampleNotepadHelper import SampleNotepadHelper
-# from lib.browsers.pageobjectmodels.DemoMainPage import DemoMainPage
 
-
-# class RemoteServer(DemoMainPage, SampleNotepadHelper):
-
-#     def __init__(self):
-#         SampleNotepadHelper.__init__(self)
-#         DemoMainPage.__init__(self)
 
 def main(arguments):
     parser = argparse.ArgumentParser(description='Remote server for the automation library')
@@ -22,6 +14,9 @@ def main(arguments):
     parser.add_argument("-p", '--port', default="8271", help='Local Port number for the socket connection. default: 8271')
     args = parser.parse_args(arguments)
     RobotRemoteServer(AllKeywordsLibrary("Remote"), host=args.address, port=args.port)
+
+def remote_status(uri):
+    return test_remote_server(uri)
 
 
 if __name__ == '__main__':

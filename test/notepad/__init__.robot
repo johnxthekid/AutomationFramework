@@ -2,7 +2,6 @@
 Documentation    Root suite for Notepad
 Suite Setup  Open notepad app
 Suite Teardown  Close notepad app
-Library    pabot.PabotLib
 Resource    ${KEYWORDLIBPATH}/keywords.library.resource
 
 *** Keywords ***
