@@ -34,17 +34,41 @@ activate.bat
 
 #### Run Configuration
 
-In order to run the tests, 
+##### IDE Configuration
+
+In order to run in the IDE, you must execute the Robot File which is the test suite.
 
 ```
 Set Working Directory to the Project Root Directory
 ```
 update the Parameters section as shown below. The run_arguments.robot contains all test configuration
-All that needs to be pass is the folder containing the test files or the actual files themselves.
+All that needs to be pass is the folder containing the test files or the actual files themselves
 
-The 'processes' parameter is used to run test in parallel. This can be used to execute in multiple processes on the same computer or multiple remote computers. 
+Suite Run:
+```
+-m robot -A .\config\run_arguments.robot test\browser
+```
 
-The file 'value_set.dat' contains the parameters to pass the different remote machines and IP address of those remote computers.  Duplicate the Sets to configure multiple computers. 
+Test Run:
+```
+-m robot -A .\config\run_arguments.robot test\browser\browser_test
+```
+
+passing variables
+```
+robot -A .\config\run_arguments.robot --variable BROWSER:chrome test\browser
+```
+
+#### Command Line Configuration
+To run on the command line, navigate to the project root directory and run the command below
+```
+python -m robot -A .\config\run_arguments.robot test\browser
+```
+
+##### Parallel Execution
+
+As mentioned above, this framework also has the capabillities to run test in parallel. In order to do so, the test can be executed as specified below: 
+
 
 Suite Run:
 ```
@@ -61,6 +85,11 @@ passing variables
 pabot --verbose --pabotlib --resourcefile .\config\value_set.dat --processes 1 -A 
 .\config\run_arguments.robot --variable BROWSER:chrome test\browser
 ```
+
+The 'processes' parameter is used to run test in parallel. This can be used to execute in multiple processes on the same computer or multiple remote computers. 
+
+The file 'value_set.dat' contains the information for the differnet remote machines such as the IP address of those remote computers.  Duplicate the Sets to configure multiple computers. 
+
 
 #### Remote Server configuration
 To run on a remote server, the python script to start the remote server must be executed.
