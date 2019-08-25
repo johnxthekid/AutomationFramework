@@ -27,7 +27,6 @@ class RemoteServerListener:
                 BuiltIn().run_keyword('Get Arguments')
                 server_uri = BuiltIn().get_variable_value('${RunLocation}')
                 print(f"New Run Location: {server_uri}")    
-                # break
             else:
                 break
 
