@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    sample test suite
-Resource    ${KEYWORDLIBPATH}/keywords.library.resource
+Resource    ${CURDIR}/../keywords.library.resource
 
 *** Test Cases ***
 test sample actions on broswer

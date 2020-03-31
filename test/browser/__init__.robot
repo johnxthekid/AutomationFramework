@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Browsers Root Suite
-Resource    ${KEYWORDLIBPATH}/keywords.library.resource
+Resource    ${CURDIR}/../keywords.library.resource
 Suite Setup  launch browser
 Suite Teardown  close and release values
 

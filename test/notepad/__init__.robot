@@ -2,7 +2,7 @@
 Documentation    Root suite for Notepad
 Suite Setup  Open notepad app
 Suite Teardown  Close notepad app
-Resource    ${KEYWORDLIBPATH}/keywords.library.resource
+Resource    ${CURDIR}/../keywords.library.resource
 
 *** Keywords ***
 Open notepad app

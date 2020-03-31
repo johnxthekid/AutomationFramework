@@ -2,35 +2,28 @@
 Documentation    Root Suite for all test
 Library     pabot.PabotLib
 Library     ${CURDIR}/../lib/utils/RemoteServerListener.py
-# Suite Setup     get arguments
 Suite Teardown  reset values
 
 *** Variables ***
-${KEYWORDLIBPATH}       ${CURDIR}
 ${KeywordLibrary}       ${CURDIR}/../lib/utils/AllKeywordsLibrary.py
-${RunLocation}          Local Libraries
+${Server_URI}           Local Libraries
 ${HOST}                 ${EMPTY}
 ${PORT}                 ${EMPTY}
 
 *** Keywords ***
 get arguments
-    Set Global Variable    ${RunLocation}
+    Set Global Variable    ${Server_URI}
     Set Global Variable    ${KeywordLibrary}
 
-    Run Keyword and Ignore Error    get resource values
-    Run Keyword If  "${HOST}" != "${EMPTY}"
+    Run Keyword If  "${RUN_LOCATION}" == "remote"
     ...     Set Remote Library
 
-    Set Global Variable     ${KEYWORDLIBPATH}
-    Set Global Variable     ${browser}
-    log to console          ${RunLocation}
+    Set Global Variable     ${BROWSER}
+    log to console          Sever URI: ${Server_URI}
     log to console          Run Library: ${KeywordLibrary}
 
-    # Import Resource     ${CURDIR}/keywords.library.resource
-
-get resource values
+Set Remote Library
     ${valuesetname}=    Acquire Value Set
-    # ${CURRENT_TAG}=     Get Value From Set  tags
     ${browser}=     Get Value From Set   BROWSER
     ${HOST}=    Get Value From Set      HOST
     ${PORT}=    Get Value From Set      PORT
@@ -43,10 +36,9 @@ get resource values
     Set Global Variable     ${PORT}
     log to console          PORT: ${PORT}
 
-Set Remote Library
     ${KeywordLibrary}=   Set Variable            Remote
-    ${RunLocation}=      Set Variable            http://${HOST}:${PORT}
-    Set Global Variable    ${RunLocation}
+    ${Server_URI}=      Set Variable            http://${HOST}:${PORT}
+    Set Global Variable    ${Server_URI}
     Set Global Variable    ${KeywordLibrary}
 
 reset values

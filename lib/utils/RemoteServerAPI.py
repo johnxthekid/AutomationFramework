@@ -15,6 +15,7 @@ def main(arguments):
     args = parser.parse_args(arguments)
     RobotRemoteServer(AllKeywordsLibrary("Remote"), host=args.address, port=args.port)
 
+
 def remote_status(uri):
     return test_remote_server(uri)
 

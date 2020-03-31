@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation    Sample suite for notepad test cases
-Resource    ${KEYWORDLIBPATH}/keywords.library.resource
+Resource    ${CURDIR}/..//keywords.library.resource
 
 *** Test Cases ***
 sample test case scenario
