@@ -46,18 +46,20 @@ All that needs to be pass is the folder containing the test files or the actual 
 
 Suite Run:
 ```
--m robot -A .\config\run_arguments.robot test\browser
+-m robot -A .\config\run_arguments.robot -s test.browser .
 ```
 
 Test Run:
 ```
--m robot -A .\config\run_arguments.robot test\browser\browser_test
+-m robot -A .\config\run_arguments.robot --test "test sample actions on broswer" .
 ```
 
 passing variables
 ```
-robot -A .\config\run_arguments.robot --variable BROWSER:chrome test\browser
+robot -A .\config\run_arguments.robot --variable BROWSER:chrome --suite test.browser .
 ```
+
+Without passing the --suite argument, the __init__.robot file is not executed.
 
 #### Command Line Configuration
 To run on the command line, navigate to the project root directory and run the command below
