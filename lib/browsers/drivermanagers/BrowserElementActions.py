@@ -1,3 +1,5 @@
+from time import sleep
+
 from selenium.webdriver.common.actions import mouse_button
 from selenium.webdriver.support import wait
 from selenium.webdriver.support.ui import WebDriverWait
@@ -5,34 +7,88 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains as AC
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchAttributeException, NoSuchElementException, ElementNotVisibleException, \
-    InvalidElementStateException, StaleElementReferenceException, ElementClickInterceptedException
+    InvalidElementStateException, StaleElementReferenceException, ElementClickInterceptedException, TimeoutException
 
 import logging
 log = logging.getLogger(__name__)
 
 
 class ElementActions:
+    browser = None
+    element = None
+    locator = None
 
-    def __init__(self, browser_driver, *locator, multiple=False):
+    def __init__(self, browser_driver, element=None, locator=None): #, *locator, multiple=False):
         """
         Customs actions that an element can perform on the application
         :param element_instance:
         """
         self.browser = browser_driver
+        self.element = element
         self.locator = locator
-        if len(self.locator) > 2:
-            raise AttributeError(f"locator expected to contain type and value. {self.locator}{len(self.locator)}")
+        # if len(self.locator) > 2:
+        #     raise AttributeError(f"locator expected to contain type and value. {self.locator}{len(self.locator)}")
 
-        if multiple:
-            self.element = self.browser.find_elements(*self.locator)
+        # self.get(*locator, multiple)
+        # if multiple:
+        #     self.element = self.browser.find_elements(*locator)
+        # else:
+        #     self.element = self.browser.find_element(*locator)
+
+    def get(self, locator, many=False):
+        '''
+        returns the instance of the elements found on the page
+        '''
+        # if self._is_element_present(locator, many): #self.browser.find_elements(*locator)
+        print("Initializing element")
+        self.wait_for_element_to_load(locator)
+        if many:
+            new_element = self.browser.find_elements(*locator)
         else:
-            self.element = self.browser.find_element(*self.locator)
+            new_element = self.browser.find_element(*locator)
+            print(f"element created: {new_element}")
+        return ElementActions(self.browser, new_element, locator)
+
+    # @classmethod
+    # def set_instance(cls, *locator, many):
+    #     if many:
+    #         cls.element = cls.browser.find_elements(*locator)
+    #     else:
+    #         cls.element = cls.browser.find_element(*locator)
+    #     # if many:
+    #     #     self.element = self.browser.find_elements(*locator)
+    #     # else:
+    #     #     self.element = self.browser.find_element(*locator)
+        
+    def wait_for_element_to_load(self, locator, wait_time=10):
+        try:
+            element = EC.presence_of_element_located(locator)
+            WebDriverWait(self.browser, wait_time).until(element)
+        except TimeoutException:
+            raise TimeoutException(f"Page was not loaded, element: {locator} is not present")
+
+    def _is_element_present(self, locator, many=False, wait_time=10):
+        while(True):
+            try:
+                self.browser.find_elements(*locator) if many else self.browser.find_element(*locator)
+                return True
+            except NoSuchElementException:
+                if wait_time == 0:
+                    return False
+                sleep(wait_time)
+                wait_time = wait_time - 1
 
     def get_element_instance(self):
         """
         :return: the instance of the element.
         """
         return self.element
+
+    def get_element_properties(self):
+        """
+        :return: list of attributes for the elements
+        """
+        return self.get_element_instance().get_property('attributes')
 
     def wait_visible(self, expected_status=True, wait_time=1):
         """
@@ -48,8 +104,8 @@ class ElementActions:
             else:
                 log.debug("Waiting for the element to NOT be visible")
                 return WebDriverWait(self.browser, wait_time).until_not(EC.visibility_of(self.element))
-        except Exception:
-            log.error(f"Exception thrown: {Exception}")
+        except TimeoutException:
+            TimeoutException(f"Waiting for Element to be {expected_status} failed")
             return False
 
     def click(self, wait_time=3):
@@ -60,11 +116,11 @@ class ElementActions:
         :return:
         """
         try:
-            WebDriverWait(self.browser, wait_time).until(EC.visibility_of(self.element))
+            self.wait_visible(wait_time=wait_time)
+            # WebDriverWait(self.browser, wait_time).until(EC.element_to_be_clickable(self.locator)).click()
             self.element.click()
-        except StaleElementReferenceException as e:
-            log.error("Element was not visible")
-            raise e.msg
+        except TimeoutException:
+            raise TimeoutException(f"Element: {self.locator} was not clickable in time")
 
     @property
     def select(self):
@@ -229,37 +285,34 @@ class ElementActions:
     #     except AttributeError:
     #         raise AttributeError("Element does not have the collapse() function")
 
-    # def get_element_text(self, wait_time=1):
-    #     """
-    #     retrieves the text value of the element.
-    #     :param wait_time: wait time to retrieves the value
-    #     :return: the text value
-    #     """
-    #     try:
-    #         self.wait_visible(True, wait_time)
-    #         return self.element.texts()[0]
-    #     except TimeoutError:
-    #         raise TimeoutError("element not displayed. TimeoutError")
-    #     except ElementNotFoundError:
-    #         raise ElementNotFoundError("element not found. ElementNotFoundError")
-    #     except AttributeError:
-    #         raise AttributeError("Element does not have the texts() function")
-    #
-    # def set_element_text(self, text_value, wait_time=1):
-    #     """
-    #     sets the text value of the element.
-    #     :param text_value: the text value to input
-    #     :param wait_time: wait time to retrieves the value
-    #     """
-    #     try:
-    #         self.wait_visible(True, wait_time)
-    #         self.element.set_text(text_value)
-    #     except TimeoutError:
-    #         raise TimeoutError("element not displayed. TimeoutError")
-    #     except ElementNotFoundError:
-    #         raise ElementNotFoundError("element not found. ElementNotFoundError")
-    #     except AttributeError:
-    #         raise AttributeError("Element does not have the set_text() function")
+    def get_element_text(self, wait_time=1):
+        """
+        retrieves the text value of the element.
+        :param wait_time: wait time to retrieves the value
+        :return: the text value
+        """
+        try:
+            # self.wait_visible(True, wait_time)
+            # return self.get_element_instance().get_attribute('textContent')
+            return self.element.text
+        except TimeoutError:
+            raise TimeoutError("element not displayed. TimeoutError")
+        except AttributeError:
+            raise AttributeError("Element does not have the text function")
+    
+    def set_element_text(self, text_value, wait_time=1):
+        """
+        sets the text value of the element.
+        :param text_value: the text value to input
+        :param wait_time: wait time to retrieves the value
+        """
+        try:
+            self.wait_visible(True, wait_time)
+            self.element.send_keys(text_value)
+        except TimeoutError:
+            raise TimeoutError("element not displayed. TimeoutError")
+        except AttributeError:
+            raise AttributeError("Element does not have the set_text() function")
     #
     # def input_click(self, wait_time=1):
     #     """

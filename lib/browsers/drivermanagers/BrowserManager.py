@@ -68,6 +68,7 @@ class BrowserManager:
     def close_browser(self, browser_id):
         browser = self.get_browser_instance(browser_id)
         browser.quit()
+        self.delele_browser_instance(browser_id)
 
     def get_page_title(self, browser_id):
         browser = self.get_browser_instance(browser_id)

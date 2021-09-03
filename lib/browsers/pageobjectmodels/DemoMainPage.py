@@ -14,13 +14,13 @@ class DemoMainPage:
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
     _browser_manager = None
 
-    def __init__(self):
-        self._browser_manager = BrowserManager()
+    def __init__(self, manager):
+        self._browser_manager = manager
 
-    @staticmethod
-    def open_browser(browser):
-        browser_id = BrowserManager.open_browser(browser)
-        return browser_id
+    # @staticmethod
+    # def open_browser(browser):
+    #     browser_id = BrowserManager.open_browser(browser)
+    #     return browser_id
 
     def select_departure_city(self, browser_id, city):
         driver = self._browser_manager.get_browser_instance(browser_id)
@@ -41,18 +41,18 @@ class DemoMainPage:
         flights = ElementActions(driver, *flight_result_table, multiple=True)
         return [flight.text for flight in flights.element]
 
-    def open_page(self, browser_id, url):
-        driver = self._browser_manager.get_browser_instance(browser_id)
-        driver.get(url)
+    # def open_page(self, browser_id, url):
+    #     driver = self._browser_manager.get_browser_instance(browser_id)
+    #     driver.get(url)
 
-    def get_page_title(self, browser_id):
-        driver = self._browser_manager.get_browser_instance(browser_id)
-        return driver.title
+    # def get_page_title(self, browser_id):
+    #     driver = self._browser_manager.get_browser_instance(browser_id)
+    #     return driver.title
 
-    def close_browser(self, browser_id):
-        driver = self._browser_manager.get_browser_instance(browser_id)
-        driver.close()
-        self._browser_manager.delele_browser_instance(browser_id)
+    # def close_browser(self, browser_id):
+    #     driver = self._browser_manager.get_browser_instance(browser_id)
+    #     driver.close()
+    #     self._browser_manager.delele_browser_instance(browser_id)
 
 
 if __name__ == '__main__':

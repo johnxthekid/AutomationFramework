@@ -64,7 +64,7 @@ Without passing the --suite argument, the __init__.robot file is not executed.
 #### Command Line Configuration
 To run on the command line, navigate to the project root directory and run the command below
 ```
-python -m robot -A .\config\run_arguments.robot test\browser
+python -m robot -A .\config\run_arguments.robot --suite test.browser .
 ```
 
 ##### Parallel Execution
