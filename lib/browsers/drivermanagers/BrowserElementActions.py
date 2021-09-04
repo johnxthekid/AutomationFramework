@@ -67,7 +67,7 @@ class ElementActions:
         except TimeoutException:
             raise TimeoutException(f"Page was not loaded, element: {locator} is not present")
 
-    def _is_element_present(self, locator, many=False, wait_time=10):
+    def is_element_present(self, locator, many=False, wait_time=10):
         while(True):
             try:
                 self.browser.find_elements(*locator) if many else self.browser.find_element(*locator)
@@ -116,9 +116,9 @@ class ElementActions:
         :return:
         """
         try:
-            self.wait_visible(wait_time=wait_time)
-            # WebDriverWait(self.browser, wait_time).until(EC.element_to_be_clickable(self.locator)).click()
-            self.element.click()
+            # self.wait_visible(wait_time=wait_time)
+            WebDriverWait(self.browser, wait_time).until(EC.element_to_be_clickable(self.locator)).click()
+            # self.element.click()
         except TimeoutException:
             raise TimeoutException(f"Element: {self.locator} was not clickable in time")
 

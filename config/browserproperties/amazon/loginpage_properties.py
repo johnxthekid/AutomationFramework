@@ -31,7 +31,7 @@ amazon_giftcard_reload_button = (By.CSS_SELECTOR, 'span > a.a-button-text')   # 
 # Gift Card Reload Page
 amazon_giftcard_reload_title = (By.CSS_SELECTOR, '#productTitle')  # Amazon Reload
 amazon_giftcard_reload_other = (By.CSS_SELECTOR, 'input[name="oneTimeReloadAmount"]')
-amazon_giftcard_reload_buy_button = (By.CSS_SELECTOR, 'input[name="submit.gc-buy-now"]')
+amazon_giftcard_reload_buy_button = (By.CSS_SELECTOR, 'div[data-feature-name="buyNow"]') #'input[name="submit.gc-buy-now"]')
 amazon_giftcard_reload_button_text = (By.CSS_SELECTOR, 'input[name="submit.gc-buy-now"] + span')   # Buy Now
 
 # Checkout Page
@@ -40,7 +40,7 @@ amazon_checkout_selected_card = (By.CSS_SELECTOR, 'span[data-field="cc name"]')
 amazon_checkout_selected_card_number = (By.CSS_SELECTOR, '[data-field="tail"]')
 amazon_checkout_change_payment = (By.ID, 'payChangeButtonId')
 amazon_checkout_payment_cards = (By.CSS_SELECTOR, '[data-co-brand]')
-amazon_checkout_new_payment_checkbox = (By.CSS_SELECTOR, 'a-radio')
+amazon_checkout_new_payment_checkbox = (By.CSS_SELECTOR, '[data-co-brand] .a-radio') # input')
 amazon_checkout_new_payment_card = (By.CLASS_NAME, 'pmts-cc-detail')
 amazon_checkout_new_payment_number = (By.CLASS_NAME, 'span.pmts-cc-number')
 amazon_checkout_payment = (By.CSS_SELECTOR, 'h3[data-testid]')     # second index for payment method

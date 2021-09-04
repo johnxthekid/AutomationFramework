@@ -5,6 +5,8 @@ sys.path.append(path.join(path.dirname(__file__), "..", "..", ".."))
 import uuid
 from robot.api import logger
 
+from selenium.webdriver.chrome.options import Options
+
 from lib.browsers.drivermanagers.ChromeManager import ChromeManager
 from lib.browsers.drivermanagers.EdgeManager import EdgeManager
 from lib.browsers.drivermanagers.FirefoxManager import FirefoxManager
@@ -18,14 +20,14 @@ class BrowserSetup:
     _driver = None
 
     @classmethod
-    def _init_browser(cls, browser_type, driver_location=None):
+    def _init_browser(cls, browser_type, driver_location=None, new_options=None):
         browser_list = {chrome: ChromeManager, edge: EdgeManager, firefox: FirefoxManager}
         # if cls._driver is None:
         _browser = browser_list.get(browser_type, None)
         if _browser is None:
             raise AttributeError(f"incorrect browser type provide: {browser_type}")
 
-        return _browser(driver_location).open_browser()
+        return _browser(driver_location, new_options).open_browser()
         # return cls._driver
 
 
@@ -36,18 +38,18 @@ class BrowserManager:
         logger.info("Browser Manager set")
 
     @staticmethod
-    def open_browser(browser=None, driver_location=None):
+    def open_browser(browser=None, driver_location=None, new_options=None):
         if browser is None:
             raise AttributeError(f"Please specify one of the following browsers to initialize: \n{chrome, edge, firefox}")
         else:
-            return BrowserManager.set_browser_instance(browser, driver_location)
+            return BrowserManager.set_browser_instance(browser, driver_location, new_options)
 
     @staticmethod
-    def set_browser_instance(browser, driver_location=None):
-        browser_instance = BrowserSetup._init_browser(browser, driver_location)
+    def set_browser_instance(browser, driver_location=None, new_options=None):
+        browser_instance = BrowserSetup._init_browser(browser, driver_location, new_options=new_options)
         browser_id = str(uuid.uuid1())
         BrowserManager.__BROWSER_INSTANCES.update({browser_id: browser_instance})
-        return browser_id
+        return browser_id, browser_instance
 
     @staticmethod
     def delele_browser_instance(browser_id):
