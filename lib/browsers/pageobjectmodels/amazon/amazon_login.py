@@ -88,39 +88,51 @@ class AmazonLoginPage:
         self.element.get(props.amazon_checkout_title)
         
     def checkout(self, card_name, card_number):
+        # if self.element.is_element_present(
+        buy_button = self.element.get(props.amazon_checkout_use_payment)
+        if not "Use this payment" in buy_button.get_element_text():
+            selected_card = self.element.get(props.amazon_checkout_selected_card)
+            selected_card_number = self.element.get(props.amazon_checkout_selected_card_number)
+        # if card_name  not in selected_card.get_element_text():
+            # if card_number not in selected_card_number.get_element_text():    
+            change_payment = self.element.get(props.amazon_checkout_change_payment)
+            change_payment.click()
+        payment_cards = self.element.get(props.amazon_checkout_payment_cards, True)
+        print(f"payments: {payment_cards.get_element_instance()}")
+        print(f"total payment cards: {len(payment_cards.get_element_instance())}")
+        for index, card in enumerate(payment_cards.get_element_instance()):
+            if card_number[-4:] in card.text:
+                print(f"card found: {card.text}")
+                radio_button = self.element\
+                    .get_sub_element(props.amazon_checkout_new_payment_checkbox, parent=card)
+                print(f"card checkbox: {radio_button.get_element_instance()}")
+                print(f"card checkbox: {radio_button.get_element_text()}")
+                radio_button.click(validate=False)
+                assert(radio_button.is_selected(), "card checkbox not selected")
+
+                buy_button.click()
+                if self.element.is_element_present(props.amazon_checkout_verify_card_input):
+                    card_verify = self.element.get(props.amazon_checkout_verify_card_input, True, index - 1)
+                    card_verify_button = self.element.get(props.amazon_checkout_verify_card_button)
+                    card_verify.set_element_text(card_number)
+                    card_verify_button.click() 
+                    card_verify_button.wait_visible(False, wait_time=10) 
+                    buy_button.click()
+                break  
+        
+        change_payment.reload_element()
+        assert(change_payment.wait_visible(wait_time=15), "Card was not selected successfully, payment option still open")
+
         selected_card = self.element.get(props.amazon_checkout_selected_card)
         selected_card_number = self.element.get(props.amazon_checkout_selected_card_number)
-        if card_name  not in selected_card.get_element_text():
-            if card_number not in selected_card_number.get_element_text():    
-                change_payment = self.element.get(props.amazon_checkout_change_payment)
-                change_payment.click()
-                payment_cards = self.element.get(props.amazon_checkout_payment_cards, True)
-                print(f"payments: {payment_cards.get_element_instance()}")
-                print(f"total payment cards: {len(payment_cards.get_element_instance())}")
-                for index, card in enumerate(payment_cards.get_element_instance()):
-                    if card_number[-4] in card.text:
-                        print(f"card found: {card.text}")
-                        radio_button = self.element\
-                            .get(props.amazon_checkout_new_payment_checkbox, True)\
-                            .get_element_instance()[index]
-                        print(f"card checkbox: {radio_button.get_property('attributes')}")
-                        print(f"card checkbox: {radio_button.text}")
-                        radio_button.click()
-                        assert(radio_button.is_selected(), "card checkbox not selected")
-
-        self.element.get(props.amazon_checkout_use_payment).click()
-        if self.element.is_element_present(props.amazon_checkout_verify_card_input):
-            card_verify = self.element.get(props.amazon_checkout_verify_card_input)
-            card_verify_button = self.element.get(props.amazon_checkout_verify_card_button)
-            card_verify.set_element_text(card_number)
-            card_verify_button.click()
-
-        
-
-        
+        assert(card_name in selected_card.get_element_text(), f"Incorrect card selected, {selected_card.get_element_text()}")
         if card_name in selected_card.get_element_text():
             if card_number in selected_card_number.get_element_text():
                 raise ValueError("Card number is incorrect")
+
+        # finalize payment
+        # buy_button.click()
+        
 
     def test_checkout(self):
         radio_button = self.element\
@@ -132,16 +144,16 @@ class AmazonLoginPage:
 
 if __name__ == '__main__':
     options = None
-    # options = [("debuggerAddress", "127.0.0.1:9222")]
+    options = [("debuggerAddress", "127.0.0.1:9222")]
     bm = BrowserManager()
     browser_id, browser = bm.open_browser('chrome', new_options=options)
     browser.maximize_window()
     amzn = AmazonLoginPage(browser)
-    browser.get('http://www.amazon.com/')
-    amzn.goto_amazon_signin_page()
-    amzn.login_to_amazon("john.exantus@gmail.com", "AshteTout1206#")
-    amzn.goto_amazon_gift_card_page()
-    amzn.reload_amazon_gift_card(1)
-    amzn.checkout("ending in 2741", "2741")
+    # browser.get('http://www.amazon.com/')
+    # amzn.goto_amazon_signin_page()
+    # amzn.login_to_amazon("john.exantus@gmail.com", "AshteTout1206#")
+    # amzn.goto_amazon_gift_card_page()
+    # amzn.reload_amazon_gift_card(1)
+    amzn.checkout("ending in 2741", "5517910003852741")
     # amzn.test_checkout()
 

@@ -23,6 +23,9 @@ class ChromeManager:
         # chrome_options.add_argument('--headless')
         # chrome_options.add_argument('--no-sandbox')
         # chrome_options.add_argument('--disable-dev-shm-usage')
+        '''
+        chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\selenum\ChromeProfile"
+        '''
         chrome_options = Options()
         if self.new_options is not None:
             if not isinstance(self.new_options, list):

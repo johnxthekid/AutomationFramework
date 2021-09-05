@@ -40,13 +40,13 @@ amazon_checkout_selected_card = (By.CSS_SELECTOR, 'span[data-field="cc name"]')
 amazon_checkout_selected_card_number = (By.CSS_SELECTOR, '[data-field="tail"]')
 amazon_checkout_change_payment = (By.ID, 'payChangeButtonId')
 amazon_checkout_payment_cards = (By.CSS_SELECTOR, '[data-co-brand]')
-amazon_checkout_new_payment_checkbox = (By.CSS_SELECTOR, '[data-co-brand] .a-radio') # input')
+amazon_checkout_new_payment_checkbox = (By.CSS_SELECTOR, 'label') #'a-radio') #'[data-co-brand] .a-radio') # input')
 amazon_checkout_new_payment_card = (By.CLASS_NAME, 'pmts-cc-detail')
 amazon_checkout_new_payment_number = (By.CLASS_NAME, 'span.pmts-cc-number')
 amazon_checkout_payment = (By.CSS_SELECTOR, 'h3[data-testid]')     # second index for payment method
 amazon_checkout_payment_card = (By.CSS_SELECTOR, 'div.pmts-instrument-box')    # look for card: MasterCard ending in 2741
 amazon_checkout_payment_card_checkbox = (By.CSS_SELECTOR, 'div.pmts-instrument-box input') # selects the card at the right index
-amazon_checkout_use_payment = (By.CSS_SELECTOR, 'input[aria-labelledby="orderSummaryPrimaryActionBtn-announce"]')
+amazon_checkout_use_payment = (By.CSS_SELECTOR, 'div.continue-buttons') # 'input[aria-labelledby="orderSummaryPrimaryActionBtn-announce"]')
 amazon_checkout_use_payment_text = (By.CSS_SELECTOR, 'input[aria-labelledby="orderSummaryPrimaryActionBtn-announce"] > span') # Use this payment method
-amazon_checkout_verify_card_input = (By.CSS_SELECTOR, 'div.pmts-instrument-box input[type="text"]')
+amazon_checkout_verify_card_input = (By.CSS_SELECTOR, '.apx-add-credit-card-number')
 amazon_checkout_verify_card_button = (By.CSS_SELECTOR, 'div.pmts-instrument-box Button')

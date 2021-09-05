@@ -35,19 +35,49 @@ class ElementActions:
         # else:
         #     self.element = self.browser.find_element(*locator)
 
-    def get(self, locator, many=False):
+    def get(self, locator, many=False, index=None):
         '''
         returns the instance of the elements found on the page
         '''
-        # if self._is_element_present(locator, many): #self.browser.find_elements(*locator)
-        print("Initializing element")
-        self.wait_for_element_to_load(locator)
-        if many:
-            new_element = self.browser.find_elements(*locator)
+        if self.is_element_present(locator): #self.browser.find_elements(*locator)
+            print("Initializing element")
+            self.wait_for_element_to_load(locator)
+            if many:
+                new_element = self.browser.find_elements(*locator)
+                if index is not None:
+                    new_element = new_element[index]
+            else:
+                new_element = self.browser.find_element(*locator)
+                print(f"element created: {new_element}")
         else:
-            new_element = self.browser.find_element(*locator)
-            print(f"element created: {new_element}")
+            raise AttributeError(f"element was not found. {locator}")
         return ElementActions(self.browser, new_element, locator)
+
+    def get_sub_element(self, locator, parent=None, many=False, index=None):
+        '''
+        returns the instance of the elements found on the page
+        '''
+        if parent is not None:
+            self.element = parent
+        if self.is_element_present(locator): #self.browser.find_elements(*locator)
+            print("Initializing element")
+            self.wait_for_element_to_load(locator)
+            if many:
+                new_element = self.element.find_elements(*locator)
+                if index is not None:
+                    new_element = new_element[index]
+            else:
+                new_element = self.element.find_element(*locator)
+                print(f"element created: {new_element}")
+        else:
+            raise AttributeError(f"element was not found. {locator}")
+        return ElementActions(self.browser, new_element, locator)
+
+    def reload_element(self):
+        """
+        Recheck the element with the DOM
+        """
+        self.element = self.browser.find_element(*self.get_element_locator())
 
     # @classmethod
     # def set_instance(cls, *locator, many):
@@ -67,10 +97,10 @@ class ElementActions:
         except TimeoutException:
             raise TimeoutException(f"Page was not loaded, element: {locator} is not present")
 
-    def is_element_present(self, locator, many=False, wait_time=10):
+    def is_element_present(self, locator, wait_time=10):
         while(True):
             try:
-                self.browser.find_elements(*locator) if many else self.browser.find_element(*locator)
+                self.browser.find_element(*locator)
                 return True
             except NoSuchElementException:
                 if wait_time == 0:
@@ -83,6 +113,12 @@ class ElementActions:
         :return: the instance of the element.
         """
         return self.element
+
+    def get_element_locator(self):
+        """
+        :return: the locator of the element
+        """
+        return self.locator
 
     def get_element_properties(self):
         """
@@ -108,7 +144,7 @@ class ElementActions:
             TimeoutException(f"Waiting for Element to be {expected_status} failed")
             return False
 
-    def click(self, wait_time=3):
+    def click(self, validate=True, wait_time=3):
         """
         Executes the element's click event if it exist.
         This function will not move the mouse pointer over the element
@@ -117,8 +153,10 @@ class ElementActions:
         """
         try:
             # self.wait_visible(wait_time=wait_time)
-            WebDriverWait(self.browser, wait_time).until(EC.element_to_be_clickable(self.locator)).click()
-            # self.element.click()
+            if validate:
+                WebDriverWait(self.browser, wait_time).until(EC.element_to_be_clickable(self.locator)).click()
+            else:
+                self.element.click()
         except TimeoutException:
             raise TimeoutException(f"Element: {self.locator} was not clickable in time")
 
