@@ -109,7 +109,6 @@ class AmazonLoginPage:
                 assert(radio_button.is_selected(), "card checkbox not selected")
 
                 buy_button.click()
-                # change_payment = self.element.get(props.amazon_checkout_change_payment)
                 if not self.element.is_element_present(props.amazon_checkout_change_payment, wait_time=5):
                     card_verify = self.element\
                         .get_sub_element(props.amazon_checkout_verify_card_input, parent=card)
