@@ -1,5 +1,5 @@
 import sys
-from os import path
+from os import path, environ
 
 from selenium.common.exceptions import ErrorInResponseException, NoSuchElementException
 from selenium.webdriver.common.keys import Keys
@@ -49,9 +49,11 @@ class AmazonLoginPage:
         continue_button = self.element.get(props.amazon_signin_continue)
         # username_value = input("User email: ")
         username.set_element_text(username_value)
+        print(f"user name typed: {username.get_element_text()}")
+        assert(username.get_element_text() != "", f"{username.get_element_text()}")
         continue_button.click()
+        assert(self.element.is_element_present(props.amazon_signin_password), "password page not displayed")
         password = self.element.get(props.amazon_signin_password)
-        # password_value = input("password value: ")
         password.set_element_text(password_value)
         submit = self.element.get(props.amazon_signin_button)
         submit.click()  
@@ -67,17 +69,19 @@ class AmazonLoginPage:
 
         self.element.get(props.amazon_account_title)
         self.element.get(props.amazon_account_giftcard).click()
-        self.element.get(props.amazon_giftcard_balance)
+        assert(self.element.is_element_present(props.amazon_giftcard_balance), "Giftcard reload page not displayed")
         gitfcard_balance = self.element.get(props.amazon_giftcard_balance)
         print(f"current balance: {gitfcard_balance.get_element_text()}")
         giftcard_balance_tab = self.element.get(props.amazon_giftcard_balance_tab)
         giftcard_balance_tab.click()
         assert(giftcard_balance_tab.get_element_text() == "View Gift Card Balance and Activity", "gift card balance tab is not active")
 
-    def reload_amazon_gift_card(self, reload_amount):
+    def goto_giftcard_reload_page(self):
         reload_button = self.element.get(props.amazon_giftcard_reload_button)
         reload_button.click()
         self.element.get(props.amazon_giftcard_reload_title)
+    
+    def reload_amazon_gift_card(self, reload_amount):
         reload_field = self.element.get(props.amazon_giftcard_reload_other)
         reload_field.set_element_text(reload_amount)
         assert(reload_field.get_element_text() == reload_amount, f"Reload amount is incorrect. actual: {reload_field.get_element_text()} expected: {reload_amount}")
@@ -93,10 +97,10 @@ class AmazonLoginPage:
         if not "Use this payment" in buy_button.get_element_text():
             selected_card = self.element.get(props.amazon_checkout_selected_card)
             selected_card_number = self.element.get(props.amazon_checkout_selected_card_number)
-        # if card_name  not in selected_card.get_element_text():
-            # if card_number not in selected_card_number.get_element_text():    
+  
             change_payment = self.element.get(props.amazon_checkout_change_payment)
             change_payment.click()
+        # change_payment = self.element.get(props.amazon_checkout_change_payment)
         payment_cards = self.element.get(props.amazon_checkout_payment_cards, True)
         print(f"payments: {payment_cards.get_element_instance()}")
         print(f"total payment cards: {len(payment_cards.get_element_instance())}")
@@ -105,23 +109,31 @@ class AmazonLoginPage:
                 print(f"card found: {card.text}")
                 radio_button = self.element\
                     .get_sub_element(props.amazon_checkout_new_payment_checkbox, parent=card)
-                print(f"card checkbox: {radio_button.get_element_instance()}")
                 print(f"card checkbox: {radio_button.get_element_text()}")
                 radio_button.click(validate=False)
                 assert(radio_button.is_selected(), "card checkbox not selected")
 
                 buy_button.click()
-                if self.element.is_element_present(props.amazon_checkout_verify_card_input):
-                    card_verify = self.element.get(props.amazon_checkout_verify_card_input, True, index - 1)
-                    card_verify_button = self.element.get(props.amazon_checkout_verify_card_button)
-                    card_verify.set_element_text(card_number)
-                    card_verify_button.click() 
-                    card_verify_button.wait_visible(False, wait_time=10) 
-                    buy_button.click()
+                change_payment = self.element.get(props.amazon_checkout_change_payment)
+                if not change_payment.wait_visible():
+                # if self.element.is_element_present(props.amazon_checkout_verify_card_input):
+                    # card_verify = self.element.get(props.amazon_checkout_verify_card_input, True, index - 1)
+                    # card_verify_button = self.element.get(props.amazon_checkout_verify_card_button)
+                    card_verify = self.element\
+                        .get_sub_element(props.amazon_checkout_verify_card_input, parent=card)
+                    card_verify_button = self.element\
+                        .get_sub_element(props.amazon_checkout_verify_card_button, parent=card)
+                        # card_verify.click(validate=True)
+                    if card_verify_button.wait_visible(wait_time=5):
+                        print(f"properties: \n{card_verify.get_element_properties()}")
+                        card_verify.set_element_text(card_number)
+                        assert(card_number == card_verify.get_element_text(), f"card number entered is incorrect. value: {card_verify.get_element_text()}")
+                        card_verify_button.click() 
+                        card_verify_button.wait_visible(False, wait_time=4) 
+                        buy_button.click()
                 break  
         
-        change_payment.reload_element()
-        assert(change_payment.wait_visible(wait_time=15), "Card was not selected successfully, payment option still open")
+        # assert(change_payment.wait_visible(), "Card was not selected successfully, payment option still open")
 
         selected_card = self.element.get(props.amazon_checkout_selected_card)
         selected_card_number = self.element.get(props.amazon_checkout_selected_card_number)
@@ -131,29 +143,43 @@ class AmazonLoginPage:
                 raise ValueError("Card number is incorrect")
 
         # finalize payment
-        # buy_button.click()
-        
+        buy_button.reload_element()
+        assert("place your order" in buy_button.get_element_text(), f"Incorrect label on buy button. Text: {buy_button.get_element_text()}")
+        buy_button.click()
+        assert(self.element.is_element_present(props.amazon_success_order_text_tag), "Success order page title not found")
+        success_title = self.element.get(props.amazon_success_order_text_tag)
+        assert(props.amazon_success_order_text in success_title.get_element_text(), f"success text not displayed. text: {success_title.get_element_text()}")
+        order_ammount = self.element.get(props.amazon_success_summary_value)
+        print(f"order amount: {order_ammount.get_element_text()}")
 
-    def test_checkout(self):
-        radio_button = self.element\
-                            .get(props.amazon_checkout_new_payment_checkbox, True)\
-                            .get_element_instance()[13]
-        # print(f"card checkbox: {radio_button.get_property('attributes')}")
-        print(f"card checkbox: {radio_button.text}")
-        radio_button.click()
+    def buy_more_giftcard(self):
+        buy_another = self.element.get(props.amazon_success_summary_buy_another)
+        print(f"buy another text: {buy_another.get_element_text()}")
+        assert(("Send another Gift Card" == buy_another.get_element_text()), f"link text incorrect, text: {buy_another.get_element_text()}")
+        buy_another.click()
+        assert(self.element.is_element_present(props.amazon_reload_giftcard_title), "Reload giftcard page not displayed.")
+        assert("Gift Cards" in self.element.get(props.amazon_reload_giftcard_title).get_element_text(), f"reload page title incorrect. text: {props.amazon_reload_giftcard_title}")
+        reload_link = self.element.get(props.amazon_reload_link)
+        reload_link.click()
+        assert(self.element.is_element_present(props.amazon_giftcard_reload_title), "giftcard reload page not displayed")
+        
 
 if __name__ == '__main__':
     options = None
+    user = environ.get('amzn_user')
+    pwd = environ.get('amzn_password')
+    card = environ.get('amzn_tmobile')
     options = [("debuggerAddress", "127.0.0.1:9222")]
     bm = BrowserManager()
     browser_id, browser = bm.open_browser('chrome', new_options=options)
-    browser.maximize_window()
+    # browser.maximize_window()
     amzn = AmazonLoginPage(browser)
     # browser.get('http://www.amazon.com/')
     # amzn.goto_amazon_signin_page()
-    # amzn.login_to_amazon("john.exantus@gmail.com", "AshteTout1206#")
-    # amzn.goto_amazon_gift_card_page()
-    # amzn.reload_amazon_gift_card(1)
-    amzn.checkout("ending in 2741", "5517910003852741")
-    # amzn.test_checkout()
-
+    # amzn.login_to_amazon(user, pwd)
+    amzn.goto_amazon_gift_card_page()
+    amzn.goto_giftcard_reload_page()
+    for _ in range(2):
+        amzn.reload_amazon_gift_card(1) 
+        amzn.checkout(f"ending in {card[-4:]}", card)
+        amzn.buy_more_giftcard()

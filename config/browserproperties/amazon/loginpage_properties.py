@@ -50,3 +50,15 @@ amazon_checkout_use_payment = (By.CSS_SELECTOR, 'div.continue-buttons') # 'input
 amazon_checkout_use_payment_text = (By.CSS_SELECTOR, 'input[aria-labelledby="orderSummaryPrimaryActionBtn-announce"] > span') # Use this payment method
 amazon_checkout_verify_card_input = (By.CSS_SELECTOR, '.apx-add-credit-card-number')
 amazon_checkout_verify_card_button = (By.CSS_SELECTOR, 'div.pmts-instrument-box Button')
+
+# Order success page
+amazon_success_order_text = "Thank you, your order has been placed."
+amazon_success_order_text_tag =  (By.CSS_SELECTOR, 'h4') 
+amazon_success_summary_text_tag = (By.CSS_SELECTOR, 'div[cel_widget_id="purchase-summary"] > div')
+amazon_success_summary_value = (By.CSS_SELECTOR, 'div[cel_widget_id="purchase-summary"] > div>strong')
+amazon_success_summary_buy_another = (By.CSS_SELECTOR, 'div > a.a-link-emphasis')
+
+#Reload gift card page
+amazon_reload_giftcard_title = (By.CSS_SELECTOR, 'h1') # Gift Cards
+amazon_reload_link = (By.CSS_SELECTOR, 'li a[href*="create"]') #Reload your balance
+amazon_reload_balance_link = (By.CSS_SELECTOR, 'li a[href*="balance"]') # your gift card balance
