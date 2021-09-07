@@ -171,3 +171,4 @@ if __name__ == '__main__':
         amzn.reload_amazon_gift_card(1) 
         amzn.checkout(f"ending in {card[-4:]}", card)
         amzn.buy_more_giftcard()
+    bm.close_browser(browser_id)

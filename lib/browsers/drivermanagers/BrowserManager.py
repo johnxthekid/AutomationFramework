@@ -67,7 +67,7 @@ class BrowserManager:
         browser = self.get_browser_instance(browser_id)
         browser.get(url)
 
-    def close_browser(self, browser_id):
+    def close_browser(self, browser_id=None):
         browser = self.get_browser_instance(browser_id)
         browser.quit()
         self.delele_browser_instance(browser_id)
