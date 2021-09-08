@@ -14,7 +14,6 @@ launch browser
     open browser    ${browser}
     open page   ${URL}
     verify sofi page loaded
-    # Set Global Variable     ${driver}
 
 close and release values
     close browser

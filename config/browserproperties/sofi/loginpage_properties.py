@@ -19,3 +19,6 @@ home_page_title = (By.CSS_SELECTOR, 'h2')
 verify_input = (By.CSS_SELECTOR, 'input')
 verify_button = (By.CSS_SELECTOR, 'button[data-qa="verify"]')
 remember_checkbox = (By.CSS_SELECTOR, '[data-qa="rememberMe"]')
+
+# Homepage
+nav_menu = (By.CSS_SELECTOR, '[data-qa="nav-bar-user-button"] span')  # Open Navigation

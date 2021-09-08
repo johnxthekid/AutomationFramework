@@ -7,6 +7,4 @@ Resource    ${CURDIR}/../keywords.library.resource
 Login to Sofi
     [Tags]    DEBUG
     goto sofi login page
-    ${username} =	Get Value From User	    Input user name
-    ${password} =	Get Value From User	    Input password	    hidden=yes
-    login to sofi   ${username}     ${password}
+    login to sofi   %{sofi_user}     %{sofi_password}

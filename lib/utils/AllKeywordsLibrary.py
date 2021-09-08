@@ -15,22 +15,23 @@ class AllKeywordsLibrary(DemoMainPage, SampleNotepadHelper, SofiLoginPage):
     _browser_manager = None
     _browser = None
     _browser_id = None
+    _driver = None
 
     def __init__(self, run_location):
         logger.info(f"Running keyword library: {run_location}")
         self._browser_manager = BrowserManager()
 
         SampleNotepadHelper.__init__(self)
-        SofiLoginPage.__init__(self, self._browser_manager)
         
-
-    def open_browser(self, browser_type):
-        self._browser_id = BrowserManager.open_browser(browser_type)
+    def open_browser(self, browser_type, options=None):
+        self._browser_id, self.driver = BrowserManager.open_browser(browser_type, options)
         self._browser = BrowserManager.get_browser_instance(self._browser_id)
-        DemoMainPage.__init__(self, self._browser)
+        DemoMainPage.__init__(self, self.driver)
+        SofiLoginPage.__init__(self, self.driver)
+
 
     def open_page(self, url):
-        self._browser.get(url)
+        self.driver.get(url)
 
     def get_page_title(self):
         return self._browser_manager.get_page_title()
