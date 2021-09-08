@@ -14,3 +14,8 @@ login_page_password = (By.CSS_SELECTOR, 'input[data-qa="password"]')
 login_page_submit = (By.CSS_SELECTOR, 'button[data-qa="login"]')
 login_page_error = (By.CSS_SELECTOR, 'input[data-qa="password"] + span')
 home_page_title = (By.CSS_SELECTOR, 'h2')
+
+# verify page
+verify_input = (By.CSS_SELECTOR, 'input')
+verify_button = (By.CSS_SELECTOR, 'button[data-qa="verify"]')
+remember_checkbox = (By.CSS_SELECTOR, '[data-qa="rememberMe"]')
