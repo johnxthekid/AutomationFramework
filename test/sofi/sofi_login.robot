@@ -8,3 +8,4 @@ Login to Sofi
     [Tags]    DEBUG
     goto sofi login page
     login to sofi   %{sofi_user}     %{sofi_password}
+    logout

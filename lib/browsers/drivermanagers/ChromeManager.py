@@ -23,16 +23,21 @@ class ChromeManager:
         # chrome_options.add_argument('--headless')
         # chrome_options.add_argument('--no-sandbox')
         # chrome_options.add_argument('--disable-dev-shm-usage')
+        # chrome_options.add_argument('--user-data-dir=C:\selenum\ChromeProfile')
+        # --user-data-dir=%localappdata%\\Google\\Chrome\\User Data   --profile-directory=Profile 2
         '''
         chrome.exe --remote-debugging-port=9222 --user-data-dir="C:\selenum\ChromeProfile"
         '''
         chrome_options = Options()
         if self.new_options is not None:
-            if not isinstance(self.new_options, list):
-                raise AttributeError("chrome options has to a list of tuples [('key', 'value), ....]")
+            # if not isinstance(self.new_options, list):
+            #     raise AttributeError("chrome options has to a list of tuples [('key', 'value), ....]")
             for value in self.new_options:
-                print(f"v1: {value[0]}, v2: {value[1]}")
-                chrome_options.add_experimental_option(value[0], value[1])
+                if isinstance(value, list) or isinstance(value, tuple):
+                    print(f"v1: {value[0]}, v2: {value[1]}")
+                    chrome_options.add_experimental_option(value[0], value[1])
+                else:
+                    chrome_options.add_argument(value)
         return webdriver.Chrome(self.driver_location, chrome_options=chrome_options)
 
 

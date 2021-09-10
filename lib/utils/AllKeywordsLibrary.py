@@ -23,8 +23,8 @@ class AllKeywordsLibrary(DemoMainPage, SampleNotepadHelper, SofiLoginPage):
 
         SampleNotepadHelper.__init__(self)
         
-    def open_browser(self, browser_type, options=None):
-        self._browser_id, self.driver = BrowserManager.open_browser(browser_type, options)
+    def open_browser(self, browser_type, driver_location=None, options=None):
+        self._browser_id, self.driver = BrowserManager.open_browser(browser_type, driver_location, options)
         self._browser = BrowserManager.get_browser_instance(self._browser_id)
         DemoMainPage.__init__(self, self.driver)
         SofiLoginPage.__init__(self, self.driver)

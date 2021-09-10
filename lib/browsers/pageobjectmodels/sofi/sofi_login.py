@@ -9,10 +9,10 @@ from robot.api import logger
 from lib.browsers.drivermanagers.BrowserManager import BrowserManager
 from lib.browsers.drivermanagers.BrowserElementActions import ElementActions
 from config.browserproperties.sofi.loginpage_properties import (
-    sofi_icon, sofi_logo, login_link, login_page_title, login_page_email,
-    login_page_password, login_page_submit, login_page_title_value,
-    login_page_error, verify_button, verify_input, remember_checkbox,
-    nav_menu
+    sofi_logo, login_link, login_page_title, login_page_email,
+    login_page_password, login_page_submit, login_page_error, 
+    verify_button, verify_input, remember_checkbox, nav_menu, 
+    user_menu_logout
 )
 
 
@@ -49,10 +49,20 @@ class SofiLoginPage:
             raise NoSuchCookieException("Verify code is needed to log in")
         assert(self.browser.is_element_present(nav_menu), "Homepage is not displayed")
 
+    def logout(self):
+        user_menu_button = self.browser.get(nav_menu, True, index=1)
+        user_menu_button.click(validate=False)
+        logout_button = self.browser.get(user_menu_logout)
+        assert(logout_button.wait_visible())
+        logout_button.click()
+        assert(self.browser.is_element_present(login_page_email), "User was not logged out successfully")
+
+
 if __name__ == '__main__':
     user = environ.get('sofi_user')
     pwd = environ.get('sofi_password')
     options = None
+    # options = [("debuggerAddress", "127.0.0.1:9222")]
     bm = BrowserManager()
     browser_id, driver = bm.open_browser('chrome', new_options=options)
     driver.maximize_window()
@@ -61,3 +71,4 @@ if __name__ == '__main__':
     sofi.verify_sofi_page_loaded()
     sofi.goto_sofi_login_page()
     sofi.login_to_sofi(user, pwd)
+    sofi.logout()
