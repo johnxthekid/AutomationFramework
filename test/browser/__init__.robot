@@ -1,21 +1,23 @@
 *** Settings ***
-Documentation    Sample test on browsers
-Library  ../../lib/browsers/drivermanagers/BrowserManager.py    ${BROWSER}
+Documentation    Browsers Root Suite
+Resource    ${CURDIR}/../keywords.library.resource
 Suite Setup  launch browser
-Suite Teardown  close browser
+Suite Teardown  close and release values
 
-*** variables ***
+
+*** Variables ***
 ${URL}          http://blazedemo.com/
-${BROWSER}      chrome
 
-*** keywords ***
+*** Keywords ***
 launch browser
     [Tags]    DEBUG
-    open page   ${URL}
-    ${title} =  get page title
+    ${driver} =   open browser    ${browser}
+    open page   ${driver}   ${URL}
+    ${title} =  get page title  ${driver}
     log to console  ${title}
-    should match  ${title}  BlazeDemo
 
-    ${driver}   get browser instance
-    Set Global Variable     ${BROWSER}
     Set Global Variable     ${driver}
+
+close and release values
+    close browser   ${driver}
+    

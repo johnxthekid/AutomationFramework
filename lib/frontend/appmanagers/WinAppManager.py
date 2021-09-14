@@ -7,6 +7,7 @@ from pywinauto.timings import wait_until, TimeoutError
 from pywinauto.findwindows import ElementNotFoundError, find_windows, WindowNotFoundError
 from retrying import retry
 from tempfile import NamedTemporaryFile
+import uuid
 
 import logging
 log = logging.getLogger(__name__)
@@ -16,6 +17,7 @@ class WinAppManager:
     UIA = "uia"
     WIN32 = "win32"
     EXISTING_APP_PROCESS = []
+    APP_INSTANCES = {}
 
     def __init__(self, app_type="uia"):
         '''
@@ -58,9 +60,19 @@ class WinAppManager:
             else:
                 log.info(f"New application process started successfully. Process ID {self.app.process}")
                 break
-
+        app_id = str(uuid.uuid1())
         self.__class__.EXISTING_APP_PROCESS.append(app_process)
-        return app_dlg
+        self.APP_INSTANCES.update({app_id: app_dlg})
+        print(self.__class__.EXISTING_APP_PROCESS)
+        return app_id
+
+    @classmethod
+    def get_app_instance(cls, app_id):
+        return cls.APP_INSTANCES.get(app_id, None)
+
+    @classmethod
+    def delete_app_instance(cls, app_id):
+        del cls.APP_INSTANCES[app_id]
 
     @retry(stop_max_attempt_number=3)
     def connect_to_app(self, app_location):
@@ -215,18 +227,20 @@ class WinAppManager:
 
         return handles
 
-    def close_app_instance(self, app_instance=None):
+    def close_app_instance(self, app_id):
         """draw_outline("red")
         closes the instance of the application provided
         :param app_instance: the instance of the application running
         :return: True if the application was closed successfully
         """
+        app_instance = cls.APP_INSTANCES.get(app_id, None)
         if app_instance is None:
-            app_window = self.app.top_window()
+            app_instance = self.app.top_window()
+        # todo: Need to remove app process from the process list
 
         try:
-            if app_window.is_visible():
-                app_window.close()
+            if app_instance.is_visible():
+                app_instance.close()
             else:
                 log.debug("Application Window was not found. Already closed")
         except ElementNotFoundError:

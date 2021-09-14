@@ -1,13 +1,14 @@
 *** Settings ***
-Documentation    suite initialize file
+Documentation    Root suite for Notepad
 Suite Setup  Open notepad app
 Suite Teardown  Close notepad app
-Library  ../../lib/frontend/apphelpers/SampleNotepadHelper.py
+Resource    ${CURDIR}/../keywords.library.resource
 
 *** Keywords ***
 Open notepad app
-    ${notepad_instance} =  open notepad
-    set global variable  ${notepad_instance}
+    [Tags]    DEBUG
+    ${notepad_id} =     open notepad
+    set global variable  ${notepad_id}
 
 close notepad app
-    user exit notepad   ${notepad_instance}
+    user exit notepad   ${notepad_id}

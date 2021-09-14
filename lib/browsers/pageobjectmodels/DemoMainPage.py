@@ -1,40 +1,71 @@
-from selenium.webdriver.common.by import By
+import sys
+from os import path
+sys.path.append(path.join(path.dirname(__file__), "..", "..", ".."))
 
+from robot.api import logger
+
+from lib.browsers.drivermanagers.BrowserManager import BrowserManager
 from lib.browsers.drivermanagers.BrowserElementActions import ElementActions
+from config.browserproperties.demopage_properties import *
+
 
 
 class DemoMainPage:
+    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
+    _browser_manager = None
 
-    def __init__(self, driver):
-        self._driver = driver
+    def __init__(self, manager):
+        self._browser_manager = manager
 
-    def select_departure_city(self, city):
-        departure_city = ElementActions(self._driver, *(By.XPATH, f"//select[@name='fromPort']"))
-        departure_city.select.select_by_value(city)
+    # @staticmethod
+    # def open_browser(browser):
+    #     browser_id = BrowserManager.open_browser(browser)
+    #     return browser_id
 
-    def select_destination_city(self, city):
-        destination_city = ElementActions(self._driver, *(By.XPATH, f"//select[@name='toPort']/option[@value='{city}']"))
-        destination_city.click()
+    def select_departure_city(self, browser_id, city):
+        driver = self._browser_manager.get_browser_instance(browser_id)
+        departure_city_field = ElementActions(driver, *departure_city)
+        departure_city_field.select.select_by_value(city)
 
-    def search_for_flights(self):
-        ElementActions(self._driver, *(By.XPATH, "//input[@type='submit']")).click()
+    def select_destination_city(self, browser_id, city):
+        driver = self._browser_manager.get_browser_instance(browser_id)
+        destination_city_field = ElementActions(driver, *destination_city)
+        destination_city_field.select.select_by_value(city)
 
-    def get_flight_results(self):
-        flights = ElementActions(self._driver, *(By.XPATH, "//table[@class='table']/tbody/tr"), multiple=True)
+    def search_for_flights(self, browser_id):
+        driver = self._browser_manager.get_browser_instance(browser_id)
+        ElementActions(driver, *search_flight_button).click()
+
+    def get_flight_results(self, browser_id):
+        driver = self._browser_manager.get_browser_instance(browser_id)
+        flights = ElementActions(driver, *flight_result_table, multiple=True)
         return [flight.text for flight in flights.element]
+
+    # def open_page(self, browser_id, url):
+    #     driver = self._browser_manager.get_browser_instance(browser_id)
+    #     driver.get(url)
+
+    # def get_page_title(self, browser_id):
+    #     driver = self._browser_manager.get_browser_instance(browser_id)
+    #     return driver.title
+
+    # def close_browser(self, browser_id):
+    #     driver = self._browser_manager.get_browser_instance(browser_id)
+    #     driver.close()
+    #     self._browser_manager.delele_browser_instance(browser_id)
 
 
 if __name__ == '__main__':
     pass
-    # bm = BrowserManager('chrome')
-    # driver = bm.get_browser_instance()
-    # bm.open_page("http://blazedemo.com/")
-    # print(bm.get_page_title())
-    #
-    # demo = DemoMainPage(driver)
-    # demo.select_departure_city('Paris')
-    # demo.select_destination_city('London')
-    # demo.search_for_flights()
-    # print(demo.get_flight_results())
-    # bm.close_browser()
+    # bm = BrowserManager()
+    # driver = bm.open_browser('chrome')
+    # bm.open_page(driver, "http://blazedemo.com/")
+    # print(bm.get_page_title(driver))
+    
+    # demo = DemoMainPage()
+    # demo.select_departure_city(driver, 'Paris')
+    # demo.select_destination_city(driver, 'London')
+    # demo.search_for_flights(driver)
+    # print(demo.get_flight_results(driver))
+    # bm.close_browser(driver)
 
