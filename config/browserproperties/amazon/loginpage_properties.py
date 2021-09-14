@@ -16,6 +16,7 @@ amazon_signin_continue = (By.CSS_SELECTOR, 'input#continue')
 amazon_signin_password = (By.CSS_SELECTOR, 'input[name="password"]')
 amazon_signin_button = (By.CSS_SELECTOR, '#signInSubmit')
 amazon_signin_button_text = (By.CSS_SELECTOR, '#signInSubmit') # Sign-In
+amazon_signout_link = (By.CSS_SELECTOR, 'a#nav-item-signout')
 
 #Account Page
 amazon_account_title = (By.CSS_SELECTOR, 'h1') # Your Account

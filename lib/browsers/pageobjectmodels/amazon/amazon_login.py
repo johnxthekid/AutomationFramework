@@ -151,6 +151,10 @@ class AmazonLoginPage:
         reload_link.click()
         assert(self.element.is_element_present(props.amazon_giftcard_reload_title), "giftcard reload page not displayed")
         
+    def logout(self):
+        logout = self.element.get(props.amazon_signout_link)
+        logout.click(validate=False)
+        assert(self.element.is_element_present(props.amazon_signin_email), "User was not logged out successfully")
 
 if __name__ == '__main__':
     options = None
@@ -171,4 +175,5 @@ if __name__ == '__main__':
         amzn.reload_amazon_gift_card(1) 
         amzn.checkout(f"ending in {card[-4:]}", card)
         amzn.buy_more_giftcard()
+    amzn.logout()
     bm.close_browser(browser_id)
