@@ -6,7 +6,7 @@ This framework also includes the feature run in parallel or in a remote server.
 
 ## Getting Started
 
-This a private repository on Bitbucket. Please contact the author to receive a demo
+This automation framework is still a work a project, it was specifically designed by me to be flexible and scalable. Feel free to use this repository and provide feedback.
 
 ### Prerequisites
 
