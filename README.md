@@ -111,4 +111,4 @@ python RemoteServerAPI -a 127.0.0.1 -p 8272
 
 ## License
 
-This project is property of John Exantus and may be reused without explicit permission.
+view license file in the root folder
