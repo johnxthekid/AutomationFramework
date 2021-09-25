@@ -1,11 +1,6 @@
 import sys
 from os import path, environ
-
-from selenium.common.exceptions import ErrorInResponseException, NoSuchElementException
-from selenium.webdriver.common.keys import Keys
 sys.path.append(path.join(path.dirname(__file__), "..", "..", "..", ".."))
-
-from robot.api import logger
 
 from lib.browsers.drivermanagers.BrowserManager import BrowserManager
 from lib.browsers.drivermanagers.BrowserElementActions import ElementActions

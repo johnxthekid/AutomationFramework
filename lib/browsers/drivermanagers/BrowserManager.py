@@ -77,12 +77,5 @@ class BrowserManager:
         return browser.title
 
 
-if __name__ == "__main__":
-    bm = BrowserManager()
-    browser_id = bm.open_browser('chrome')
-    bm.open_page(browser_id, "http://blazedemo.com/")
-    print(bm.get_page_title(browser_id))
-
-
 
 
