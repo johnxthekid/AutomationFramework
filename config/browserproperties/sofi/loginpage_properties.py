@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 # Fields on page
 sofi_icon = (By.CSS_SELECTOR, "#global-top-nav a")
 sofi_logo = (By.CSS_SELECTOR, "[data-qa='nav-sofi-logo']")
-sofi_icon_value = "SoFi Homepage" #'#global-top-nav a'.attributes[4].value
+sofi_icon_value = "SoFi Homepage"
 login_link = (By.CSS_SELECTOR, "a[data-qa='nav-log-in']")
 login_page_title_value = "Log in to your account."
 login_page_title = (By.CSS_SELECTOR, 'h1[data-qa="page-title"]')
