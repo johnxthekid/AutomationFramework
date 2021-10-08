@@ -34,7 +34,7 @@ class ChromeManager:
         chrome_options = Options()
         if self.new_options is not None:
             for value in self.new_options:
-                if isinstance(value, list) or isinstance(value, tuple):
+                if isinstance(value, tuple):
                     chrome_options.add_experimental_option(value[0], value[1])
                 else:
                     chrome_options.add_argument(value)
