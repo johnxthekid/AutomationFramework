@@ -61,7 +61,9 @@ class SofiLoginPage:
 if __name__ == '__main__':
     user = environ.get('sofi_user')
     pwd = environ.get('sofi_password')
-    options = None
+    data_dir = environ.get('chrome_data')
+    sofi_profile = environ.get('sofi_profile')
+    options = [f"--user-data-dir={data_dir} --profile-directory={sofi_profile}"]
     # options = [("debuggerAddress", "127.0.0.1:9222")]
     bm = BrowserManager()
     browser_id, driver = bm.open_browser('chrome', new_options=options)
@@ -72,3 +74,4 @@ if __name__ == '__main__':
     sofi.goto_sofi_login_page()
     sofi.login_to_sofi(user, pwd)
     sofi.logout()
+    driver.quit()
