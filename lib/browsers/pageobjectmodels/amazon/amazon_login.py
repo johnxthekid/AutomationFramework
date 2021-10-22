@@ -134,6 +134,7 @@ class AmazonLoginPage:
         assert(props.amazon_success_order_text in success_title.get_element_text(), f"success text not displayed. text: {success_title.get_element_text()}")
         order_ammount = self.element.get(props.amazon_success_summary_value)
         print(f"order amount: {order_ammount.get_element_text()}")
+        return order_ammount.get_element_text()
 
     def buy_more_giftcard(self):
         buy_another = self.element.get(props.amazon_success_summary_buy_another)
@@ -147,8 +148,11 @@ class AmazonLoginPage:
         assert(self.element.is_element_present(props.amazon_giftcard_reload_title), "giftcard reload page not displayed")
         
     def logout(self):
+        my_account = self.element.get(props.amazon_nav_account_menu)
+        my_account.mouseover_element()
         logout = self.element.get(props.amazon_signout_link)
-        logout.click(validate=False)
+        logout.click()
+        # logout.click(validate=False)
         assert(self.element.is_element_present(props.amazon_signin_email), "User was not logged out successfully")
 
 if __name__ == '__main__':
@@ -156,7 +160,9 @@ if __name__ == '__main__':
     user = environ.get('amzn_user')
     pwd = environ.get('amzn_password')
     card = environ.get('amzn_tmobile')
-    # options = [("debuggerAddress", "127.0.0.1:9222")]
+    amazon_profile = environ.get('amzn_profile')
+    data_dir = environ.get('chrome_data')
+    options = [f"--user-data-dir={data_dir} --profile-directory={amazon_profile}"]
     bm = BrowserManager()
     browser_id, driver = bm.open_browser('chrome', new_options=options)
     driver.maximize_window()
@@ -164,11 +170,14 @@ if __name__ == '__main__':
     driver.get('http://www.amazon.com/')
     amzn.goto_amazon_signin_page()
     amzn.login_to_amazon(user, pwd)
-    amzn.goto_amazon_gift_card_page()
-    amzn.goto_giftcard_reload_page()
-    for _ in range(2):
+    reload_amount = '1.00'
+    for _ in range(7):
+        amzn.goto_amazon_gift_card_page()
+        amzn.goto_giftcard_reload_page()
         amzn.reload_amazon_gift_card(1) 
-        amzn.checkout(f"ending in {card[-4:]}", card)
-        amzn.buy_more_giftcard()
+        loaded_amount = amzn.checkout(f"ending in {card[-4:]}", card)
+        assert(loaded_amount in reload_amount, f"loaded amount is incorrect: "
+            "expected: {reload_amount}, got: {loaded_amount}")
+        # amzn.buy_more_giftcard()
     amzn.logout()
     bm.close_browser(browser_id)

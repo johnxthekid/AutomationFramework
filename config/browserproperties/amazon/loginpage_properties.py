@@ -56,7 +56,7 @@ amazon_checkout_verify_card_button = (By.CSS_SELECTOR, 'div Button')
 amazon_success_order_text = "Thank you, your order has been placed."
 amazon_success_order_text_tag =  (By.CSS_SELECTOR, 'h4') 
 amazon_success_summary_text_tag = (By.CSS_SELECTOR, 'div[cel_widget_id="purchase-summary"] > div')
-amazon_success_summary_value = (By.CSS_SELECTOR, 'div[cel_widget_id="purchase-summary"] > div>strong')
+amazon_success_summary_value = (By.CSS_SELECTOR, 'div[cel_widget_id="typ-informationalMessage-0"]  span') #'div[cel_widget_id="purchase-summary"] > div>strong')
 amazon_success_summary_buy_another = (By.CSS_SELECTOR, 'div > a.a-link-emphasis')
 
 #Reload gift card page
