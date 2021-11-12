@@ -35,49 +35,59 @@ class ElementActions:
         # else:
         #     self.element = self.browser.find_element(*locator)
 
-    def get(self, locator, many=False, index=None):
+    def get(self, locator, wait_time=3):
         '''
-        returns the instance of the elements found on the page
+        returns the single instance of the element found on the page
         '''
-        if self.is_element_present(locator): #self.browser.find_elements(*locator)
-            print("Initializing element")
-            self.wait_for_element_to_load(locator)
-            if many:
-                new_element = self.browser.find_elements(*locator)
-                if index is not None:
-                    new_element = new_element[index]
-            else:
-                new_element = self.browser.find_element(*locator)
-                print(f"element created: {new_element}")
+        self.locator = locator
+        if self.is_element_present(wait_time=wait_time): #self.browser.find_elements(*locator)
+            new_element = self.browser.find_element(*locator)
         else:
             raise AttributeError(f"element was not found. {locator}")
         return ElementActions(self.browser, new_element, locator)
 
-    def get_sub_element(self, locator, parent=None, many=False, index=None):
+    def get_all(self, locator, index=None, wait_time=3):
+        '''
+        returns all instances of the elements
+        '''
+        self.locator = locator
+        if self.is_element_present(wait_time=wait_time):
+            new_elements = self.browser.find_elements(*locator)
+            if index is not None:
+                return ElementActions(self.browser, new_elements[index], locator)
+        else:
+            raise AttributeError(f"element was not found. {locator}")
+        return ElementActions(self.browser, new_elements, locator).get_element_instance()
+
+    def get_sub_element(self, locator, parent=None, many=False, index=None, wait_time=3):
         '''
         returns the instance of the elements found on the page
         '''
         if parent is not None:
-            self.element = parent
-        if self.is_element_present(locator): #self.browser.find_elements(*locator)
-            print("Initializing element")
-            self.wait_for_element_to_load(locator)
-            if many:
-                new_element = self.element.find_elements(*locator)
-                if index is not None:
-                    new_element = new_element[index]
-            else:
-                new_element = self.element.find_element(*locator)
-                print(f"element created: {new_element}")
-        else:
-            raise AttributeError(f"element was not found. {locator}")
-        return ElementActions(self.browser, new_element, locator)
+            _original_browser = self.browser
+            self.browser = parent
+        new_instance = self.get_all(locator, index, wait_time) if many else self.get(locator, wait_time=wait_time)
+        self.browser = _original_browser
+        return new_instance
+        # if self.is_element_present(locator): #self.browser.find_elements(*locator)
+        #     if many:
+        #         new_element = self.element.find_elements(*locator)
+        #         if index is not None:
+        #             new_element = new_element[index]
+        #             return ElementActions(self.browser, new_elements[index], locator)
+        #     else:
+        #         return 
+        #         new_element = self.element.find_element(*locator)
+        # else:
+        #     raise AttributeError(f"element was not found. {locator}")
+        # return ElementActions(self.browser, new_element, locator)
 
     def reload_element(self):
         """
         Recheck the element with the DOM
         """
         self.element = self.browser.find_element(*self.get_element_locator())
+        return self
 
     # @classmethod
     # def set_instance(cls, *locator, many):
@@ -96,12 +106,18 @@ class ElementActions:
             WebDriverWait(self.browser, wait_time).until(element)
         except TimeoutException:
             raise TimeoutException(f"Page was not loaded, element: {locator} is not present")
+        
+        return self
 
-    def is_element_present(self, locator, wait_time=10):
+    def is_element_present(self, locator=None, wait_time=10):
         while(True):
             try:
-                self.browser.find_element(*locator)
-                return True
+                if locator is None:
+                    self.browser.find_element(*self.locator)  
+                    return True
+                else:
+                    new_element = self.browser.find_element(*locator)
+                    return ElementActions(self.browser, new_element, locator)
             except NoSuchElementException:
                 if wait_time == 0:
                     return False
@@ -144,6 +160,8 @@ class ElementActions:
             TimeoutException(f"Waiting for Element to be {expected_status} failed")
             return False
 
+        return self
+
     def click(self, validate=True, wait_time=3):
         """
         Executes the element's click event if it exist.
@@ -159,6 +177,8 @@ class ElementActions:
                 self.element.click()
         except TimeoutException:
             raise TimeoutException(f"Element: {self.locator} was not clickable in time")
+
+        return self
 
     @property
     def select(self):
@@ -225,6 +245,8 @@ class ElementActions:
         except AttributeError:
             raise AttributeError("Element does not have the CurrentItemType property")
 
+        return self
+
     def is_selected(self):
         """
         :return: the selection status of the element
@@ -234,6 +256,8 @@ class ElementActions:
         except Exception:
             log.debug(f"element not displayed. {Exception}")
             return False
+
+        return self
 
     # def is_expanded(self):
     #     """
@@ -337,6 +361,9 @@ class ElementActions:
             raise TimeoutError("element not displayed. TimeoutError")
         except AttributeError:
             raise AttributeError("Element does not have the text function")
+
+    def set_focus(self, wait_time=1):
+        return self.mouseover_element(wait_time)
     
     def set_element_text(self, text_value, wait_time=1):
         """
@@ -350,7 +377,9 @@ class ElementActions:
         except TimeoutError:
             raise TimeoutError("element not displayed. TimeoutError")
         except AttributeError:
-            raise AttributeError("Element does not have the set_text() function")
+            raise AttributeError("Element does not have the send_keys() function")
+
+        return self
     #
     # def input_click(self, wait_time=1):
     #     """
@@ -424,9 +453,10 @@ class ElementActions:
     #     self.wait_visible()
     #     AC(self.browser).move_to_element(self.element).perform()
 
-    def mouseover_element(self):
+    def mouseover_element(self, wait_time=1):
         """
         Hovers the mouse over the element
         """
-        self.wait_visible()
+        self.wait_visible(wait_time=wait_time)
         AC(self.browser).move_to_element(self.element).perform()
+        return self
