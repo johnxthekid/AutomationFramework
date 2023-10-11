@@ -232,7 +232,7 @@ class ElementActions:
         try:
             return self.element.is_selected()
         except Exception:
-            log.debug(f"element not displayed. {Exception}")
+            log.debug(f"element not selected. {Exception}")
             return False
 
     # def is_expanded(self):

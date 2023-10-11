@@ -103,7 +103,7 @@ class AmazonLoginPage:
                     .get_sub_element(props.amazon_checkout_new_payment_checkbox, parent=card)
                 print(f"card checkbox: {radio_button.get_element_text()}")
                 radio_button.click(validate=False)
-                assert radio_button.is_selected(), "card checkbox not selected"
+                assert 'pmts-selected' in card.get_attribute('class'), "card checkbox not selected"
 
                 buy_button.click()
                 if not self.element.is_element_present(props.amazon_checkout_change_payment, wait_time=5):
@@ -119,7 +119,9 @@ class AmazonLoginPage:
                         card_verify_button.wait_visible(False, wait_time=4) 
                         buy_button.click()
                 break  
-        
+        else:
+            assert False, "Card was not found"
+
         selected_card = self.element.get(props.amazon_checkout_selected_card)
         selected_card_number = self.element.get(props.amazon_checkout_selected_card_number)
         assert(card_name in selected_card.get_element_text(), f"Incorrect card selected, {selected_card.get_element_text()}")
@@ -129,11 +131,11 @@ class AmazonLoginPage:
 
         # finalize payment
         buy_button.reload_element()
-        assert("place your order" in buy_button.get_element_text(), f"Incorrect label on buy button. Text: {buy_button.get_element_text()}")
+        assert("place your order" in buy_button.get_element_text().lower()), (f"Incorrect label on buy button. Text: {buy_button.get_element_text()}")
         buy_button.click()
-        assert(self.element.is_element_present(props.amazon_success_order_text_tag), "Success order page title not found")
+        assert(self.element.is_element_present(props.amazon_success_order_text_tag)), ("Success order page title not found")
         success_title = self.element.get(props.amazon_success_order_text_tag)
-        assert(props.amazon_success_order_text in success_title.get_element_text(), f"success text not displayed. text: {success_title.get_element_text()}")
+        assert(props.amazon_success_order_text.lower() in success_title.get_element_text().lower(), f"success text not displayed. text: {success_title.get_element_text()}")
         order_ammount = self.element.get(props.amazon_success_summary_value)
         print(f"order amount: {order_ammount.get_element_text()}")
         return order_ammount.get_element_text()
@@ -173,12 +175,12 @@ if __name__ == '__main__':
     amzn.goto_amazon_signin_page()
     amzn.login_to_amazon(user, pwd)
     reload_amount = '1.00'
-    for _ in range(7):
+    for _ in range(9):
         amzn.goto_amazon_gift_card_page()
         amzn.goto_giftcard_reload_page()
         amzn.reload_amazon_gift_card(1) 
         loaded_amount = amzn.checkout(f"ending in {card[-4:]}", card)
-        assert(loaded_amount in reload_amount), (f"loaded amount is incorrect: "
+        assert(reload_amount in loaded_amount), (f"loaded amount is incorrect: "
             "expected: {reload_amount}, got: {loaded_amount}")
         # amzn.buy_more_giftcard()
     amzn.logout()
