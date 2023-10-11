@@ -323,7 +323,7 @@ class ElementActions:
     #     except AttributeError:
     #         raise AttributeError("Element does not have the collapse() function")
 
-    def get_element_text(self, wait_time=1):
+    def get_element_text(self, attribute_value=None, wait_time=1):
         """
         retrieves the text value of the element.
         :param wait_time: wait time to retrieves the value
@@ -331,8 +331,10 @@ class ElementActions:
         """
         try:
             # self.wait_visible(True, wait_time)
-            # return self.get_element_instance().get_attribute('textContent')
-            return self.element.text
+            if attribute_value:
+                return self.get_element_instance().get_attribute(attribute_value)
+            else:
+                return self.element.text
         except TimeoutError:
             raise TimeoutError("element not displayed. TimeoutError")
         except AttributeError:

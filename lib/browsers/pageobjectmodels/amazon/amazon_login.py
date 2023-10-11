@@ -41,10 +41,11 @@ class AmazonLoginPage:
         username = self.element.get(props.amazon_signin_email)
         continue_button = self.element.get(props.amazon_signin_continue)
         username.set_element_text(username_value)
-        print(f"user name typed: {username.get_element_text()}")
-        assert(username.get_element_text() != "", f"{username.get_element_text()}")
+        username_entered = username.get_element_text(attribute_value='value')
+        print(f"user name typed: {username_entered}")
+        assert username.get_element_text(attribute_value='value') != "", f"value found in username field: {username.get_element_text(attribute_value='value')}"
         continue_button.click()
-        assert(self.element.is_element_present(props.amazon_signin_password), "password page not displayed")
+        assert self.element.is_element_present(props.amazon_signin_password), "password page not displayed"
         password = self.element.get(props.amazon_signin_password)
         password.set_element_text(password_value)
         submit = self.element.get(props.amazon_signin_button)
@@ -61,12 +62,12 @@ class AmazonLoginPage:
 
         self.element.get(props.amazon_account_title)
         self.element.get(props.amazon_account_giftcard).click()
-        assert(self.element.is_element_present(props.amazon_giftcard_balance), "Giftcard reload page not displayed")
+        assert self.element.is_element_present(props.amazon_giftcard_balance), "Giftcard reload page not displayed"
         gitfcard_balance = self.element.get(props.amazon_giftcard_balance)
         print(f"current balance: {gitfcard_balance.get_element_text()}")
         giftcard_balance_tab = self.element.get(props.amazon_giftcard_balance_tab)
         giftcard_balance_tab.click()
-        assert(giftcard_balance_tab.get_element_text() == "View Gift Card Balance and Activity", "gift card balance tab is not active")
+        assert giftcard_balance_tab.get_element_text() == "View Gift Card Balance and Activity", "gift card balance tab is not active"
 
     def goto_giftcard_reload_page(self):
         reload_button = self.element.get(props.amazon_giftcard_reload_button)
@@ -76,7 +77,8 @@ class AmazonLoginPage:
     def reload_amazon_gift_card(self, reload_amount):
         reload_field = self.element.get(props.amazon_giftcard_reload_other)
         reload_field.set_element_text(reload_amount)
-        assert(reload_field.get_element_text() == reload_amount, f"Reload amount is incorrect. actual: {reload_field.get_element_text()} expected: {reload_amount}")
+        assert int(reload_field.get_element_text(attribute_value='value')) == reload_amount, (
+            f"Reload amount is incorrect. actual: {reload_field.get_element_text(attribute_value='value')} expected: {reload_amount}")
         print(f"clicking of buy now button")
         buy_button = self.element.get(props.amazon_giftcard_reload_buy_button)
         print("button created so now clicking")
@@ -101,7 +103,7 @@ class AmazonLoginPage:
                     .get_sub_element(props.amazon_checkout_new_payment_checkbox, parent=card)
                 print(f"card checkbox: {radio_button.get_element_text()}")
                 radio_button.click(validate=False)
-                assert(radio_button.is_selected(), "card checkbox not selected")
+                assert radio_button.is_selected(), "card checkbox not selected"
 
                 buy_button.click()
                 if not self.element.is_element_present(props.amazon_checkout_change_payment, wait_time=5):
@@ -153,7 +155,7 @@ class AmazonLoginPage:
         logout = self.element.get(props.amazon_signout_link)
         logout.click()
         # logout.click(validate=False)
-        assert(self.element.is_element_present(props.amazon_signin_email), "User was not logged out successfully")
+        assert self.element.is_element_present(props.amazon_signin_email), "User was not logged out successfully"
 
 if __name__ == '__main__':
     options = None
@@ -176,7 +178,7 @@ if __name__ == '__main__':
         amzn.goto_giftcard_reload_page()
         amzn.reload_amazon_gift_card(1) 
         loaded_amount = amzn.checkout(f"ending in {card[-4:]}", card)
-        assert(loaded_amount in reload_amount, f"loaded amount is incorrect: "
+        assert(loaded_amount in reload_amount), (f"loaded amount is incorrect: "
             "expected: {reload_amount}, got: {loaded_amount}")
         # amzn.buy_more_giftcard()
     amzn.logout()

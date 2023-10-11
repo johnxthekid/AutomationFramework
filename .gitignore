@@ -6,3 +6,4 @@ venv/
 .pabotsuitenames
 report/
 __pycache__/
+.DS_Store
