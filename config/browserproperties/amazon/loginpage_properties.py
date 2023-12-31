@@ -39,6 +39,7 @@ amazon_giftcard_reload_button_text = (By.CSS_SELECTOR, 'input[name="submit.gc-bu
 amazon_checkout_title = (By.CSS_SELECTOR, 'div > h1')   # Checkout
 amazon_checkout_selected_card = (By.CSS_SELECTOR, 'span[data-field="cc name"]')
 amazon_checkout_selected_card_number = (By.CSS_SELECTOR, '[data-field="tail"]')
+amazon_checkout_selected_card_info = (By.CSS_SELECTOR, '#payment-option-text-default span')
 amazon_checkout_change_payment = (By.ID, 'payChangeButtonId')
 amazon_checkout_payment_cards = (By.CSS_SELECTOR, '[data-co-brand]')
 amazon_checkout_new_payment_checkbox = (By.CSS_SELECTOR, 'label')
