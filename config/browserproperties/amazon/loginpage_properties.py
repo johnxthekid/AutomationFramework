@@ -31,7 +31,9 @@ amazon_giftcard_reload_button = (By.CSS_SELECTOR, 'span > a.a-button-text')   # 
 
 # Gift Card Reload Page
 amazon_giftcard_reload_title = (By.CSS_SELECTOR, '#productTitle')  # Amazon Reload
-amazon_giftcard_reload_other = (By.CSS_SELECTOR, 'input[name="oneTimeReloadAmount"]')
+amazon_giftcard_reload_balance = (By.CSS_SELECTOR, "#a-autoid-3-announce")    # 'input[name="oneTimeReloadAmount"]')
+amazon_giftcard_reload_other = (By.CSS_SELECTOR, 'input[name="reloadAmount"]')
+amazon_giftcard_amount_set = (By.CSS_SELECTOR, "#gcui-asv-dp-price-value")       
 amazon_giftcard_reload_buy_button = (By.CSS_SELECTOR, 'div[data-feature-name="buyNow"]')
 amazon_giftcard_reload_button_text = (By.CSS_SELECTOR, 'input[name="submit.gc-buy-now"] + span')   # Buy Now
 

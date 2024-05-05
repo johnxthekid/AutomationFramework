@@ -1,6 +1,7 @@
 import sys
 from os import path, environ
 sys.path.append(path.join(path.dirname(__file__), "..", "..", "..", ".."))
+from time import sleep
 
 from lib.browsers.drivermanagers.BrowserManager import BrowserManager
 from lib.browsers.drivermanagers.BrowserElementActions import ElementActions
@@ -82,8 +83,21 @@ class AmazonLoginPage:
     def reload_amazon_gift_card(self, reload_amount):
         reload_field = self.element.get(props.amazon_giftcard_reload_other)
         reload_field.set_element_text(reload_amount)
-        assert int(reload_field.get_element_text(attribute_value='value')) == reload_amount, (
+        self.element.get(props.amazon_giftcard_reload_balance).click()
+        assert reload_field.get_element_text(attribute_value='value') == reload_amount, (
             f"Reload amount is incorrect. actual: {reload_field.get_element_text(attribute_value='value')} expected: {reload_amount}")
+        amount_set = self.element.get(props.amazon_giftcard_amount_set)
+        count = 0
+        while True:
+            amount_set_value = amount_set.get_element_text()
+            if reload_amount not in amount_set_value and count < 3:
+                sleep(1)
+                count += 1
+                continue
+            
+            if count >= 3:
+                assert False, f"amount set is incorrect. expected: {reload_amount}, actual: {amount_set_value}"
+            break
         print(f"clicking of buy now button")
         buy_button = self.element.get(props.amazon_giftcard_reload_buy_button)
         print("button created so now clicking")
@@ -180,10 +194,10 @@ if __name__ == '__main__':
     amzn.goto_amazon_signin_page()
     amzn.login_to_amazon(user, pwd)
     reload_amount = '1.00'
-    for _ in range(10):
+    for _ in range(7):
         amzn.goto_amazon_gift_card_page()
         amzn.goto_giftcard_reload_page()
-        amzn.reload_amazon_gift_card(1) 
+        amzn.reload_amazon_gift_card(reload_amount) 
         loaded_amount = amzn.checkout(f"ending in {card[-4:]}", card)
         assert(reload_amount in loaded_amount), (f"loaded amount is incorrect: "
             "expected: {reload_amount}, got: {loaded_amount}")

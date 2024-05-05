@@ -1,3 +1,3 @@
-2023/11/26-02:04:35.813 14e03 Reusing MANIFEST /Users/johnexantus/dev/projects/AutomationFramework/None --profile-directory=None/Default/shared_proto_db/metadata/MANIFEST-000001
-2023/11/26-02:04:35.813 14e03 Recovering log #3
-2023/11/26-02:04:35.814 14e03 Reusing old log /Users/johnexantus/dev/projects/AutomationFramework/None --profile-directory=None/Default/shared_proto_db/metadata/000003.log 
+2024/05/05-14:54:15.440 b603 Reusing MANIFEST /Users/johnexantus/dev/projects/AutomationFramework/None --profile-directory=None/Default/shared_proto_db/metadata/MANIFEST-000001
+2024/05/05-14:54:15.441 b603 Recovering log #3
+2024/05/05-14:54:15.443 b603 Reusing old log /Users/johnexantus/dev/projects/AutomationFramework/None --profile-directory=None/Default/shared_proto_db/metadata/000003.log 
